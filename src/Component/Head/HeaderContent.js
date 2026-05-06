@@ -5,7 +5,7 @@ import usa from '../../Asset/anglais.png'
 import logo from '../../Asset/icon.png'
 import {Dropdown, Modal} from "react-bootstrap";
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import './Annimate.css'
 import {useParams} from "react-router-dom";
 import {useMediaQuery} from "react-responsive";
@@ -51,10 +51,10 @@ const HeaderContent=({active})=>{
                 <>
                     <nav id="header" className={`navbar navbar-light position-fixed top-0 start-0 w-100 z-3 ${hasShadow ? 'bg-light shadow-lg': 'bg-transparent'}`}>
                         <div className="container-fluid">
-                            <a className="navbar-brand d-inline-flex align-items-center" href={`/${lang}/`}>
+                            <Link to={`/${lang}/`} className="text-decoration-none text-dark">
                                 <img src={logo} alt="Aris Concept" width="35" className="d-inline-block align-text-top me-2"/>
                                 <strong className="text-aris me-2">Aris</strong><strong className="text-concept">Concept</strong>
-                            </a>
+                            </Link>
                             <i onClick={()=>setShowLink(true)} className={`fa-solid fa-bars fa-2x cursor-pointer ${hasShadow ? '' : 'text-white'}`}/>
                         </div>
                     </nav>
@@ -82,22 +82,22 @@ const HeaderContent=({active})=>{
                             <div className="w-100 m-0 p-2">
                                 <ul className="list-group list-group-flush">
                                     <li className={`list-group-item btn-content ${active===1 ? 'border-aris' : ''}`}>
-                                        <a href={`/${lang}/`} className={`text-decoration-none ${active===1 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('ac')}</a>
+                                <Link to={`/${lang}/`} className={`text-decoration-none ${active===1 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('ac')}</Link>
                                     </li>
                                     <li className={`list-group-item btn-content ${active===3 ? 'border-aris' : ''}`}>
-                                        <a href={`/${lang}/apropos`} className={`text-decoration-none ${active===3 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t("apropos")}</a>
+                                        <Link to={`/${lang}/apropos`} className={`text-decoration-none ${active===3 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t("apropos")}</Link>
                                     </li>
                                     <li className={`list-group-item btn-content ${active===2 ? 'border-aris' : ''}`}>
-                                        <a href={`/${lang}/service`} className={`text-decoration-none ${active===2 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('service')}</a>
+                                        <Link to={`/${lang}/service`} className={`text-decoration-none ${active===2 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('service')}</Link>
                                     </li>
                                     <li className={`list-group-item btn-content ${active===5 ? 'border-aris' : ''}`}>
-                                        <a href={`/${lang}/avantages`} className={`text-decoration-none ${active===5 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('avantage')}</a>
+                                        <Link to={`/${lang}/avantages`} className={`text-decoration-none ${active===5 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('avantage')}</Link>
                                     </li>
                                     <li className={`list-group-item btn-content ${active===4 ? 'border-aris' : ''}`}>
-                                        <a href={`/${lang}/contact`} className={`text-decoration-none ${active===4 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('contact')}</a>
+                                        <Link to={`/${lang}/contact`} className={`text-decoration-none ${active===4 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('contact')}</Link>
                                     </li>
                                     <li className={`list-group-item btn-content ${active===6 ? 'border-aris' : ''}`}>
-                                        <a href={`/${lang}/carrier`} className={`text-decoration-none ${active===6 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('post')}</a>
+                                        <Link to={`/${lang}/carrier`} className={`text-decoration-none ${active===6 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('post')}</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -116,19 +116,19 @@ const HeaderContent=({active})=>{
                             </div>
                             <div className="d-flex justify-content-between text-white text-opacity-75 fw-bold">
                                 <div className={`me-2 mx-2 btn-animate`}>
-                                    <a href={`/${lang}/`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===1 ? 'btn-active' : ''} text-dark fw-bold`} >{t('ac')}</a>
+                                    <Link to={`/${lang}/`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===1 ? 'btn-active' : ''} text-dark fw-bold`} >{t('ac')}</Link>
                                 </div>
                                 <div className={`me-2 mx-2 btn-animate`}>
-                                    <a href={`/${lang}/apropos`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===3 ? 'btn-active' : ''} text-dark fw-bold`} >{t("apropos")}</a>
+                                    <Link to={`/${lang}/apropos`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===3 ? 'btn-active' : ''} text-dark fw-bold`} >{t("apropos")}</Link>
                                 </div>
                                 <div className={`me-2 mx-2 btn-animate`}>
-                                    <a href={`/${lang}/service`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===2 ? 'btn-active' : ''} text-dark fw-bold`} ><span className="p-2">{t('service')}</span></a>
+                                    <Link to={`/${lang}/service`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===2 ? 'btn-active' : ''} text-dark fw-bold`} ><span className="p-2">{t('service')}</span></Link>
                                 </div>
                                 <div className={`me-2 mx-2 btn-animate`}>
-                                    <a href={`/${lang}/avantages`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===5 ? 'btn-active' : ''} text-dark fw-bold`}>{t('avantage')}</a>
+                                    <Link to={`/${lang}/avantages`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===5 ? 'btn-active' : ''} text-dark fw-bold`}>{t('avantage')}</Link>
                                 </div>
                                 <div className={`me-2 mx-2 btn-animate`}>
-                                    <a href={`/${lang}/contact`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===4 ? 'btn-active' : ''} text-dark fw-bold`}>{t('contact')}</a>
+                                    <Link to={`/${lang}/contact`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===4 ? 'btn-active' : ''} text-dark fw-bold`}>{t('contact')}</Link>
                                 </div>
                                 <div className="me-2 px-2 d-flex align-items-center mx-2 btn-animate">
                                     <Dropdown>
@@ -151,7 +151,7 @@ const HeaderContent=({active})=>{
                                 </div>
                                 <div className="bg-danger h-75 my-auto border-start"/>
                                 <div className={`me-2 ps-2 btn-animate`}>
-                                    <a href={`/${lang}/carrier`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===6 ? 'btn-active' : ''} text-dark fw-bold`}><span className="p-2">{t('post')}</span></a>
+                                    <Link to={`/${lang}/carrier`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===6 ? 'btn-active' : ''} text-dark fw-bold`}><span className="p-2">{t('post')}</span></Link>
                                 </div>
                             </div>
                         </>
@@ -159,21 +159,21 @@ const HeaderContent=({active})=>{
                         <>
                             <div id="header" className="d-flex justify-content-between text-white text-opacity-75 fw-bold">
                                 <div className={`me-2 btn-animate`}>
-                                    <a href={`/${lang}/`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===1 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} >{t('ac')}</a>
+                                    <Link to={`/${lang}/`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===1 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} >{t('ac')}</Link>
                                 </div>
                                 <div className={`me-2 btn-animate`}>
-                                    <a href={`/${lang}/service`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===2 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} ><span className="p-2">{t('service')}</span></a>
+                                    <Link to={`/${lang}/service`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===2 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} ><span className="p-2">{t('service')}</span></Link>
                                 </div>
                                 <div className={`me-2 btn-animate`}>
-                                    <a href={`/${lang}/avantages`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===5 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} >{t('avantage')}</a>
+                                    <Link to={`/${lang}/avantages`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===5 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} >{t('avantage')}</Link>
                                 </div>
                                 <div className={`me-2 btn-animate`}>
-                                    <a href={`/${lang}/contact`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===4 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`}>{t('contact')}</a>
+                                    <Link to={`/${lang}/contact`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===4 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`}>{t('contact')}</Link>
                                 </div>
                             </div>
                             <div className="d-flex justify-content-between align-items-end">
                                 <div className={`me-2 btn-animate2 px-2`}>
-                                    <a href={`/${lang}/apropos`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===3 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`}>{t('apropos')}</a>
+                                    <Link to={`/${lang}/apropos`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===3 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`}>{t('apropos')}</Link>
                                 </div>
                                 <div className="bg-danger h-75 my-auto border-start"/>
                                 <div className="me-2 btn-animate2 px-2 my-auto d-flex align-items-center">
@@ -197,7 +197,7 @@ const HeaderContent=({active})=>{
                                 </div>
                                 <div className="bg-danger h-75 my-auto border-start"/>
                                 <div className={`me-2 btn-animate2 px-2`}>
-                                    <a href={`/${lang}/carrier`} className={`btn btn-header py-1 rounded-0 fs-6 ps-2 ${idActive===6 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} ><span className="p-2">{t('post')}</span></a>
+                                    <Link to={`/${lang}/carrier`} className={`btn btn-header py-1 rounded-0 fs-6 ps-2 ${idActive===6 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} ><span className="p-2">{t('post')}</span></Link>
                                 </div>
                             </div>
                         </>

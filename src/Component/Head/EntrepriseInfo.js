@@ -31,7 +31,7 @@ const EntrepriseInfo= ()=>{
     return (
         <>
             <header className="header">
-                <video className="header-video" autoPlay muted loop>
+                <video className="header-video" autoPlay muted loop preload="auto">
                     <source src={infoE} type="video/mp4" />
                     {t('videoNotSupported')}
                 </video>
