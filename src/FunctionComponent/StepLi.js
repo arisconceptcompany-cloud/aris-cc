@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 
 const StepLi = ({children, isVisible, index,setTurnOn}) => {
     useEffect(()=>{
@@ -9,7 +9,7 @@ const StepLi = ({children, isVisible, index,setTurnOn}) => {
             setTurnOn(false)
         }
         return () => clearTimeout(timeout);
-    },[isVisible])
+    },[isVisible, index, setTurnOn])
 
     return children
 

@@ -26,7 +26,7 @@ const DetailService = () => {
         }else{
             navigate('/notfound')
         }
-    },[domaine,service])
+    },[domaine, service, navigate])
     return (
         <>
             {child && parentChild && (

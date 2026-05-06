@@ -5,7 +5,7 @@ import {useMediaQuery} from "react-responsive";
 import ViewContent from "../../FunctionComponent/ViewContent";
 
 const CardServiceContent = ({onClicked,element, id}) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const navigate=useNavigate()
     const {lang}=useParams()
     const minW = useMediaQuery({query: "(max-width: 500px)"})

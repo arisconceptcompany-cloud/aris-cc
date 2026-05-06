@@ -123,7 +123,7 @@ const Footer = () => {
                 </div>
                 <div className="m-0 p-0 w-100">
                     <div className="float-start text-light d-inline-flex">
-                        <span className="pb-1">© 2024 Aris Concept company</span>
+                        <span className="pb-1">© {new Date().getFullYear()} Aris Concept company</span>
                     </div>
                     <div className="float-end text-light pb-1">
                         <span> Tous droits réservés.</span>

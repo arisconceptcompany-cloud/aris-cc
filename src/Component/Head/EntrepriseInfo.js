@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import infoE from '../../Asset/info.mp4'
 import './EntrepriseInfo.css'
 import {OverlayTrigger, Tooltip} from "react-bootstrap";

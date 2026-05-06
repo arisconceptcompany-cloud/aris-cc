@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useState} from "react";
 import IconFooter from "./IconFooter";
 import logo from "../../Asset/icon.png";
 import {useTranslation} from "react-i18next";
@@ -119,15 +119,15 @@ const AccueilFooter = () => {
                             {!wInter && (
                                 <div className="mx-0 mt-3 mb-0 p-2 w-100 d-inline-flex justify-content-between">
                                     <div className=" text-light d-inline-flex">
-                                    <span className="pb-1">
-                                        © 2024 Aris Concept
-                                        <i className="mx-2 fa fa-minus"/>
-                                                <span>{t('droit')}</span>
-                                        <i className="mx-2 fa fa-minus"/>
-                                        <span className="cursor-pointer">{t('mention')}</span>
-                                        <i className="mx-2 fa fa-minus"/>
-                                        <span className="cursor-pointer">{t('politique')}</span>
-                                    </span>
+                    <span className="pb-1">
+                        © {new Date().getFullYear()} Aris Concept
+                        <i className="mx-2 fa fa-minus"/>
+                                <span>{t('droit')}</span>
+                        <i className="mx-2 fa fa-minus"/>
+                        <span className="cursor-pointer">{t('mention')}</span>
+                        <i className="mx-2 fa fa-minus"/>
+                        <span className="cursor-pointer">{t('politique')}</span>
+                    </span>
                                     </div>
                                 </div>
                             )}
@@ -185,19 +185,19 @@ const AccueilFooter = () => {
                 {wInter && (
                     <div className="m-0 p-2 w-100 d-inline-flex justify-content-between">
                         <div className=" text-light d-inline-flex">
-                        <span className="pb-1">
-                            © 2024 Aris Concept
-                            {footM && (
-                                <>
-                                    <i className="mx-2 fa fa-minus"/>
-                                    <span>{t('droit')}</span>
-                                </>
-                            )}
-                            <i className="mx-2 fa fa-minus"/>
-                            <span className="cursor-pointer">{t('mention')}</span>
-                            <i className="mx-2 fa fa-minus"/>
-                            <span className="cursor-pointer">{t('politique')}</span>
-                        </span>
+                    <span className="pb-1">
+                        © {new Date().getFullYear()} Aris Concept
+                        {footM && (
+                            <>
+                                <i className="mx-2 fa fa-minus"/>
+                                <span>{t('droit')}</span>
+                            </>
+                        )}
+                        <i className="mx-2 fa fa-minus"/>
+                        <span className="cursor-pointer">{t('mention')}</span>
+                        <i className="mx-2 fa fa-minus"/>
+                        <span className="cursor-pointer">{t('politique')}</span>
+                    </span>
                         </div>
                         {!footM && (
                             <div className=" text-light pb-1">

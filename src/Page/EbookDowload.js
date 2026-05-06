@@ -30,7 +30,7 @@ const EbookDowload = () => {
         if (lang && ['fr', 'en'].includes(lang)) {
             i18n.changeLanguage(lang);
         }
-    },[lang])
+    },[lang, i18n])
     const [viewHeader, setViewHeader]=useState(false)
     const [viewContent, setViewContent]=useState(false)
     const [viewFooter,setViewFooter]=useState(false)

@@ -22,7 +22,8 @@ const AllService = () => {
             {id: 2, div: 'ext', image: extAdd, trans: t('aideGerer'), title: t('ext'), text: t('introExt') },
             {id: 3, div: 'web-marketing', image: web, trans: t('aideSurF'), title: t('marketing'), text: t('introMark')},
         ]
-    }, [i18n.language]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [i18n.language, t]);
     const navigate=useNavigate()
     const { lang } = useParams()
     const [clickModal,setClickModal]=useState(false)

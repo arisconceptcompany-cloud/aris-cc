@@ -7,7 +7,7 @@ import ViewContent from "../FunctionComponent/ViewContent";
 import {useTranslation} from "react-i18next";
 
 const ContatctContainer = () => {
-    const {t,i18n} = useTranslation()
+    const {t} = useTranslation()
     const elementOption=useMemo(()=>[
         {id:1, name: t('info')},
         {id:2 , name: t('rh')},
@@ -15,9 +15,9 @@ const ContatctContainer = () => {
         {id:4 , name: t('marketing')},
         {id:5 , name: t('compta')},
         {id:6 , name: t('other')},
-    ] ,[i18n.language])
+    ] ,[t])
 
-    const [selectedOption,setSelected]=useState('')
+    const setSelected = useState('')[1];
     const handleChange = (event) => {
         const selectedId = event.target.value;
         const selectedOptionObj = elementOption.find(option => option.id === parseInt(selectedId,1));
@@ -25,10 +25,10 @@ const ContatctContainer = () => {
         setSelected(selectedName);
     };
 
-    const[erreur,setErreur]=useState(false)
+    const[erreur] = useState(false)
     const [showToast,setShowToast]=useState(false)
-    const [loading,setLoading]=useState(false)
-    const [validated, setValidated] = useState(false);
+    const [loading] = useState(false)
+    const [validated] = useState(false);
 
 
     const [checked,setChecked]=useState(false)

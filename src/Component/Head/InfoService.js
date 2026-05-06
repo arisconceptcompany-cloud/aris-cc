@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next";
 import Star from "./Star";
 
 const InfoService = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <>
             <div className="row bg-gradient-info-dark w-100 text-white mt-0 mx-0 mb-3 position-relative">

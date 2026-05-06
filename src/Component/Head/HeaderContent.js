@@ -11,7 +11,7 @@ import {useParams} from "react-router-dom";
 import {useMediaQuery} from "react-responsive";
 
 const HeaderContent=({active})=>{
-    const [idActive,setIdActive]=useState(active)
+    const [idActive]=useState(active)
     const [hasShadow, setHasShadow] = useState(false);
     useEffect(() => {
         const handleScroll = () => setHasShadow(window.scrollY > 0);
@@ -23,19 +23,17 @@ const HeaderContent=({active})=>{
     const navigate = useNavigate()
     const location = useLocation()
     const { lang } = useParams()
-    const [ch,setCh]=useState(new Date())
 
     const changeLanguage = useCallback((langage) => {
         const newPath = `/${langage}${location.pathname.replace(/\/(fr|en)/, '')}`;
         navigate(newPath);
-    },[location,lang])
+    },[location, navigate])
 
     useEffect(()=>{
         if (lang && ['fr', 'en'].includes(lang)) {
             i18n.changeLanguage(lang);
-            setCh(new Date())
         }
-    },[location,lang,i18n.language])
+    },[location, lang, i18n])
     const currentIconLanguage=useMemo(()=>{
         if (i18n.language==='fr'){
             return fr

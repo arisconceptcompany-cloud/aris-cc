@@ -33,7 +33,8 @@ const ServiceDetail= ()=>{
             {id: 4, div: 'hr', bg: 'bg-info-subtle', next: 5, prev: 3, img: rh, text: t('rh'), content: t('textRh')},
             {id: 5, div: 'ext', bg: 'bg-blue', next: 1, prev: 4, img: ext, text: t('ext') , content: t('textExt')},
         ]
-    },[i18n.language])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[i18n.language, t])
     const [carDefaultClicked,setClicked]=useState(services[0])
     const [isPaused, setIsPaused] = useState(false);
 
@@ -56,29 +57,34 @@ const ServiceDetail= ()=>{
         }
     }, [isPaused,services, date]);
 
-    const afficheCarousel = useMemo(() => {
-        let elements = [];
-        let servNext = carDefaultClicked;
-        let i = 1;
-
-        while (servNext?.next !== carDefaultClicked.id) {
-            servNext = services.find((e) => e.id === servNext.next);
-            const dId=servNext.id
-            const du=i
-            elements.push(
-                <div className={`col-6 h-50 pb-2 ${i%2===0 ? 'ps-1 pe-0' : 'ps-0 pe-1'}`} key={i} >
-                    <CardServiceContent element={servNext} id={du} onClicked={()=>clickDetail(dId)}/>
-                </div>
-            );
-            i += 1;
-        }
-        return elements;
-    }, [carDefaultClicked,services]);
-
-    const clickDetail= useCallback( (id) => {
+    const clickDetail = useCallback((id) => {
         setDate(new Date())
         setClicked(services.find((e)=>e.id===id))
     },[services])
+
+    const afficheCarousel = useMemo(() => {
+        /* eslint-disable no-loop-func */
+        const elements = [];
+        let currentId = carDefaultClicked.next;
+        let i = 1;
+
+        while (currentId !== carDefaultClicked.id) {
+            const servNext = services.find((e) => e.id === currentId);
+            if (!servNext) break;
+            const dId = servNext.id;
+            const du = i;
+            const handler = () => clickDetail(dId);
+            elements.push(
+                <div className={`col-6 h-50 pb-2 ${i%2===0 ? 'ps-1 pe-0' : 'ps-0 pe-1'}`} key={i} >
+                    <CardServiceContent element={servNext} id={du} onClicked={handler}/>
+                </div>
+            );
+            i += 1;
+            currentId = servNext.next;
+        }
+        /* eslint-enable no-loop-func */
+        return elements;
+    }, [carDefaultClicked, services, clickDetail]);
 
     return (
         <>

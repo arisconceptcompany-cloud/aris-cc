@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Col, Form, InputGroup, Row, Spinner} from "react-bootstrap";
+import {Button, Col, Form, Row, Spinner} from "react-bootstrap";
 import CDSpontaneM from "../Model/CDSpontaneM.ts";
 import {useMediaQuery} from "react-responsive";
 import {useTranslation} from "react-i18next";
@@ -7,7 +7,6 @@ import {useTranslation} from "react-i18next";
 const CandidatureSpontane = () => {
 
     const [load,setLoad]=useState(false)
-    const [erreur,setErreur]=useState(false)
     const [nom,setNom]=useState('')
     const [prenom,setPrenom]=useState('')
     const [titre,setTitre]=useState('')

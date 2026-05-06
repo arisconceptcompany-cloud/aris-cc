@@ -2,7 +2,7 @@ import React, {useCallback, useState} from "react";
 import {Button, Form, Spinner} from "react-bootstrap";
 
 const Devis = ({objectTitle,t}) => {
-    const [loading, setLoading] = useState(false);
+    const [loading] = useState(false);
     const [phoneNumber,setPhoneNumber]=useState('+ ')
     const inputPhone=useCallback(
         (e) => {

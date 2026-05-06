@@ -28,7 +28,7 @@ const ViewContent = ({children,time,setIsVisible, className = '', style={}}) => 
             window.removeEventListener("scroll", handleScroll);
             clearTimeout(timeoutId);
         };
-    }, []);
+    }, [setIsVisible, time]);
 
 
     return(
