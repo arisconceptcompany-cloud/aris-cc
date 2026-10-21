@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
 import fr from '../../Asset/france.png'
 import usa from '../../Asset/anglais.png'
@@ -6,17 +6,38 @@ import logo from '../../Asset/icon.png'
 import {Dropdown, Modal} from "react-bootstrap";
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import './Annimate.css'
 import {useParams} from "react-router-dom";
 import {useMediaQuery} from "react-responsive";
+import {FaBars, FaChevronDown, FaXmark} from "react-icons/fa6";
+import './Navbar.css'
 
-const HeaderContent=({active})=>{
-    const [idActive]=useState(active)
-    const [hasShadow, setHasShadow] = useState(false);
+const HeaderContent = ({active}) => {
+    const [idActive] = useState(active)
+    const [scrolled, setScrolled] = useState(false);
+    const [openMobile, setOpenMobile] = useState(false);
+    const progressRef = useRef(null);
+
     useEffect(() => {
-        const handleScroll = () => setHasShadow(window.scrollY > 0);
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        let frame = null;
+        const handleScroll = () => {
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+                setScrolled(window.scrollY > 20);
+                const doc = document.documentElement;
+                const max = doc.scrollHeight - window.innerHeight;
+                const ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+                if (progressRef.current) {
+                    progressRef.current.style.width = `${ratio * 100}%`;
+                }
+                frame = null;
+            });
+        };
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, {passive: true});
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            if (frame) cancelAnimationFrame(frame);
+        };
     }, []);
 
     const { t, i18n } = useTranslation()
@@ -34,174 +55,115 @@ const HeaderContent=({active})=>{
             i18n.changeLanguage(lang);
         }
     },[location, lang, i18n])
-    const currentIconLanguage=useMemo(()=>{
+
+    const currentIconLanguage = useMemo(()=>{
         if (i18n.language==='fr'){
             return fr
         }
         return usa
     },[i18n.language])
 
-    const wMax = useMediaQuery({ query: "(max-width: 1120px)" });
-    const [showLink,setShowLink]=useState(false)
+    const isMobile = useMediaQuery({ query: "(max-width: 1120px)" });
+
+    const links = useMemo(() => ([
+        {id: 1, to: `/${lang}/`, label: t('ac')},
+        {id: 3, to: `/${lang}/apropos`, label: t('apropos')},
+        {id: 2, to: `/${lang}/service`, label: t('service')},
+        {id: 5, to: `/${lang}/avantages`, label: t('avantage')},
+        {id: 4, to: `/${lang}/contact`, label: t('contact')},
+    ]), [lang, t])
+
+    const languageMenu = (
+        <Dropdown.Menu className="lang-menu mt-2 border-0 shadow-sm">
+            <Dropdown.Item onClick={()=>changeLanguage('fr')} as={"div"} className={`d-inline-flex cursor-pointer text-uppercase align-items-center ${i18n.language==='fr' ? 'active-lang' : ''}`}>
+                <img src={fr} alt={"fr"} width={20} className="me-2"/>{t('fr')}
+            </Dropdown.Item>
+            <Dropdown.Item onClick={()=>changeLanguage('en')} as={"div"} className={`d-inline-flex cursor-pointer text-uppercase align-items-center ${i18n.language==='en' ? 'active-lang' : ''}`}>
+                <img src={usa} alt={"en"} width={20} className="me-2"/>{t('en')}
+            </Dropdown.Item>
+        </Dropdown.Menu>
+    )
+
     return (
         <>
-            {wMax ? (
-                <>
-                    <nav id="header" className={`navbar navbar-light position-fixed top-0 start-0 w-100 z-3 ${hasShadow ? 'bg-light shadow-lg': 'bg-transparent'}`}>
-                        <div className="container-fluid">
-                            <Link to={`/${lang}/`} className="text-decoration-none text-dark">
-                                <img src={logo} alt="Aris Concept" width="35" className="d-inline-block align-text-top me-2"/>
-                                <strong className="text-aris me-2">Aris</strong><strong className="text-concept">Concept</strong>
+            <header id="header" className={`navbar-aris ${scrolled ? 'navbar-solid' : 'navbar-over'} ${isMobile ? 'is-mobile' : ''}`}>
+                <Link to={`/${lang}/`} className="navbar-brand-link d-inline-flex align-items-center text-decoration-none">
+                    <span className="brand-mark">
+                        <img src={logo} alt="Aris Concept" width="30" className="brand-logo"/>
+                    </span>
+                    <strong className="brand-name"><span className="brand-aris">Aris</span> <span className="brand-concept">Concept</span></strong>
+                </Link>
+
+                {!isMobile && (
+                    <nav className="navbar-links d-flex align-items-center">
+                        {links.map(({id, to, label}) => (
+                            <Link key={id} to={to} className={`navbar-link ${idActive===id ? 'is-active' : ''}`}>
+                                {label}
+                                <span className="navbar-link-bar" aria-hidden="true"/>
                             </Link>
-                            <i onClick={()=>setShowLink(true)} className={`fa-solid fa-bars fa-2x cursor-pointer ${hasShadow ? '' : 'text-white'}`}/>
-                        </div>
+                        ))}
+
+                        <Dropdown className="d-inline-flex align-items-center">
+                            <Dropdown.Toggle as="span" id="lang" className="navbar-lang cursor-pointer d-inline-flex align-items-center">
+                                <img src={currentIconLanguage} alt={"currentLanguage"} width={20}/>
+                                <FaChevronDown className="lang-chevron" size={11}/>
+                            </Dropdown.Toggle>
+                            {languageMenu}
+                        </Dropdown>
+
+                        <Link to={`/${lang}/carrier`} className={`navbar-cta ${idActive===6 ? 'is-active' : ''}`}>
+                            {t('post')}
+                            <span className="navbar-cta-shine" aria-hidden="true"/>
+                        </Link>
                     </nav>
-                    <Modal show={showLink} onHide={() => setShowLink(false)} backdropClassName="p-0 m-0" dialogClassName="min-vw-100 border-0 p-0 m-0" contentClassName="rounded-0 border-0 w-100">
-                        <Modal.Header className="m-0" closeButton>
-                            <Dropdown>
-                                <Dropdown.Toggle
-                                    as="span"
-                                    id="lang"
-                                    className={`cursor-pointer fs-6 px-2 rounded-0 text-dark fw-bold`}
-                                >
-                                    <img src={currentIconLanguage} alt={"currentLanguage"} width={25} className="me-2"/><i className="ms-2 fa-solid fa-angle-down"/>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className="mt-3">
-                                    <Dropdown.Item onClick={()=>changeLanguage('fr')} as={"div"} className="d-inline-flex cursor-pointer text-uppercase justify-content-center">
-                                        <img src={fr} alt={"fr"} width={20} className="me-2 "/>{t('fr')}
-                                    </Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>changeLanguage('en')} as={"div"} className="d-inline-flex cursor-pointer text-uppercase justify-content-center">
-                                        <img src={usa} alt={"en"} width={20} className="me-2 "/>{t('en')}
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </Modal.Header>
-                        <Modal.Body className="p-0 m-0">
-                            <div className="w-100 m-0 p-2">
-                                <ul className="list-group list-group-flush">
-                                    <li className={`list-group-item btn-content ${active===1 ? 'border-aris' : ''}`}>
-                                <Link to={`/${lang}/`} className={`text-decoration-none ${active===1 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('ac')}</Link>
-                                    </li>
-                                    <li className={`list-group-item btn-content ${active===3 ? 'border-aris' : ''}`}>
-                                        <Link to={`/${lang}/apropos`} className={`text-decoration-none ${active===3 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t("apropos")}</Link>
-                                    </li>
-                                    <li className={`list-group-item btn-content ${active===2 ? 'border-aris' : ''}`}>
-                                        <Link to={`/${lang}/service`} className={`text-decoration-none ${active===2 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('service')}</Link>
-                                    </li>
-                                    <li className={`list-group-item btn-content ${active===5 ? 'border-aris' : ''}`}>
-                                        <Link to={`/${lang}/avantages`} className={`text-decoration-none ${active===5 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('avantage')}</Link>
-                                    </li>
-                                    <li className={`list-group-item btn-content ${active===4 ? 'border-aris' : ''}`}>
-                                        <Link to={`/${lang}/contact`} className={`text-decoration-none ${active===4 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('contact')}</Link>
-                                    </li>
-                                    <li className={`list-group-item btn-content ${active===6 ? 'border-aris' : ''}`}>
-                                        <Link to={`/${lang}/carrier`} className={`text-decoration-none ${active===6 ? 'text-aris fw-bold': 'text-dark'}`} style={{fontSize: '1.5rem'}}>{t('post')}</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </Modal.Body>
-                    </Modal>
-                </>
-            ): (
-                <div id="header" className={`position-fixed top-0 start-0 w-100 pt-2 px-3 pb-0 z-3 d-flex justify-content-between text-white text-opacity-75 fw-bold ${hasShadow ? ' bg-white shadow' : ''}`}  style={{ transition: 'background-color 700ms ease-in-out' }}>
-                    {hasShadow ? (
-                        <>
-                            <div className="flex-grow-1 d-inline-flex ms-3">
-                                <img onClick={()=>navigate(`/${lang}/`)} src={logo} alt="Aris Concept" className="logo-icon img-fluid me-3 cursor-pointer"/>
-                                <h4 onClick={()=>navigate(`/${lang}/`)} className="mb-0 fs-4 cursor-pointer fw-bold">
-                                    <strong style={{ color: '#D10D58' }}>Aris </strong> <strong style={{ color: '#0e8de8' }}>Concept</strong>
-                                </h4>
-                            </div>
-                            <div className="d-flex justify-content-between text-white text-opacity-75 fw-bold">
-                                <div className={`me-2 mx-2 btn-animate`}>
-                                    <Link to={`/${lang}/`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===1 ? 'btn-active' : ''} text-dark fw-bold`} >{t('ac')}</Link>
-                                </div>
-                                <div className={`me-2 mx-2 btn-animate`}>
-                                    <Link to={`/${lang}/apropos`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===3 ? 'btn-active' : ''} text-dark fw-bold`} >{t("apropos")}</Link>
-                                </div>
-                                <div className={`me-2 mx-2 btn-animate`}>
-                                    <Link to={`/${lang}/service`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===2 ? 'btn-active' : ''} text-dark fw-bold`} ><span className="p-2">{t('service')}</span></Link>
-                                </div>
-                                <div className={`me-2 mx-2 btn-animate`}>
-                                    <Link to={`/${lang}/avantages`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===5 ? 'btn-active' : ''} text-dark fw-bold`}>{t('avantage')}</Link>
-                                </div>
-                                <div className={`me-2 mx-2 btn-animate`}>
-                                    <Link to={`/${lang}/contact`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===4 ? 'btn-active' : ''} text-dark fw-bold`}>{t('contact')}</Link>
-                                </div>
-                                <div className="me-2 px-2 d-flex align-items-center mx-2 btn-animate">
-                                    <Dropdown>
-                                        <Dropdown.Toggle
-                                            as="span"
-                                            id="lang"
-                                            className={`cursor-pointer fs-6 px-2 rounded-0 text-dark fw-bold`}
-                                        >
-                                            <img src={currentIconLanguage} alt={"currentLanguage"} width={20} className="me-2 "/><i className="ms-2 fa-solid fa-angle-down"/>
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu className="mt-3">
-                                            <Dropdown.Item onClick={()=>changeLanguage('fr')} as={"div"} className="d-inline-flex cursor-pointer text-uppercase justify-content-center">
-                                                <img src={fr} alt={"fr"} width={20} className="me-2 "/>{t('fr')}
-                                            </Dropdown.Item>
-                                            <Dropdown.Item onClick={()=>changeLanguage('en')} as={"div"} className="d-inline-flex cursor-pointer text-uppercase justify-content-center">
-                                                <img src={usa} alt={"en"} width={20} className="me-2 "/>{t('en')}
-                                            </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div>
-                                <div className="bg-danger h-75 my-auto border-start"/>
-                                <div className={`me-2 ps-2 btn-animate`}>
-                                    <Link to={`/${lang}/carrier`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===6 ? 'btn-active' : ''} text-dark fw-bold`}><span className="p-2">{t('post')}</span></Link>
-                                </div>
-                            </div>
-                        </>
-                    ): (
-                        <>
-                            <div id="header" className="d-flex justify-content-between text-white text-opacity-75 fw-bold">
-                                <div className={`me-2 btn-animate`}>
-                                    <Link to={`/${lang}/`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===1 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} >{t('ac')}</Link>
-                                </div>
-                                <div className={`me-2 btn-animate`}>
-                                    <Link to={`/${lang}/service`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===2 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} ><span className="p-2">{t('service')}</span></Link>
-                                </div>
-                                <div className={`me-2 btn-animate`}>
-                                    <Link to={`/${lang}/avantages`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===5 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} >{t('avantage')}</Link>
-                                </div>
-                                <div className={`me-2 btn-animate`}>
-                                    <Link to={`/${lang}/contact`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===4 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`}>{t('contact')}</Link>
-                                </div>
-                            </div>
-                            <div className="d-flex justify-content-between align-items-end">
-                                <div className={`me-2 btn-animate2 px-2`}>
-                                    <Link to={`/${lang}/apropos`} className={`btn btn-header py-1 rounded-0 px-2 fs-6 ${idActive===3 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`}>{t('apropos')}</Link>
-                                </div>
-                                <div className="bg-danger h-75 my-auto border-start"/>
-                                <div className="me-2 btn-animate2 px-2 my-auto d-flex align-items-center">
-                                    <Dropdown>
-                                        <Dropdown.Toggle
-                                            as="span"
-                                            id="lang"
-                                            className={`cursor-pointer py-1 fs-6 px-2 rounded-0 text-white text-opacity-75 fw-bold`}
-                                        >
-                                            <img src={currentIconLanguage} alt={"currentLanguage"} width={20} className="me-2 "/><i className="ms-2 fa-solid fa-angle-down"/>
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu className="">
-                                            <Dropdown.Item onClick={()=>changeLanguage('fr')} as={"div"} className="d-inline-flex cursor-pointer text-uppercase justify-content-center">
-                                                <img src={fr} alt={"fr"} width={20} className="me-2 "/>{t('fr')}
-                                            </Dropdown.Item>
-                                            <Dropdown.Item onClick={()=>changeLanguage('en')} as={"div"} className="d-inline-flex cursor-pointer text-uppercase justify-content-center">
-                                                <img src={usa} alt={"en"} width={20} className="me-2 "/>{t('en')}
-                                            </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div>
-                                <div className="bg-danger h-75 my-auto border-start"/>
-                                <div className={`me-2 btn-animate2 px-2`}>
-                                    <Link to={`/${lang}/carrier`} className={`btn btn-header py-1 rounded-0 fs-6 ps-2 ${idActive===6 ? 'btn-active' : ''} text-white text-opacity-75 fw-bold`} ><span className="p-2">{t('post')}</span></Link>
-                                </div>
-                            </div>
-                        </>
-                    )}
+                )}
+
+                {isMobile && (
+                    <button type="button" className="navbar-burger" aria-label="Menu" onClick={()=>setOpenMobile(true)}>
+                        <FaBars size={22}/>
+                    </button>
+                )}
+
+                <div className="navbar-progress" aria-hidden="true"><span ref={progressRef}/></div>
+            </header>
+
+            <Modal show={openMobile} onHide={() => setOpenMobile(false)} fullscreen className="mobile-menu-modal">
+                <div className="mobile-menu-head d-flex align-items-center justify-content-between px-3 py-3">
+                    <Link to={`/${lang}/`} className="d-inline-flex align-items-center text-decoration-none" onClick={()=>setOpenMobile(false)}>
+                        <img src={logo} alt="Aris Concept" width="32" className="brand-logo"/>
+                        <strong className="brand-name"><span className="brand-aris">Aris</span> <span className="brand-concept">Concept</span></strong>
+                    </Link>
+                    <button type="button" className="navbar-burger" aria-label="Fermer" onClick={()=>setOpenMobile(false)}>
+                        <FaXmark size={24}/>
+                    </button>
                 </div>
-            )}
+                <Modal.Body className="mobile-menu-body px-3">
+                    <nav className="d-flex flex-column">
+                        {links.map(({id, to, label}) => (
+                            <Link key={id} to={to} onClick={()=>setOpenMobile(false)} className={`mobile-menu-link ${idActive===id ? 'is-active' : ''}`}>
+                                {label}
+                                <span className="mobile-menu-index">{String(id).padStart(2, '0')}</span>
+                            </Link>
+                        ))}
+                        <Link to={`/${lang}/carrier`} onClick={()=>setOpenMobile(false)} className={`mobile-menu-link ${idActive===6 ? 'is-active' : ''}`}>
+                            {t('post')}
+                            <span className="mobile-menu-index">06</span>
+                        </Link>
+                    </nav>
+
+                    <div className="mobile-lang mt-4 pt-3">
+                        <span className="mobile-lang-label">Langue</span>
+                        <div className="d-flex gap-2 mt-2">
+                            <button type="button" className={`mobile-lang-btn ${i18n.language==='fr' ? 'is-active' : ''}`} onClick={()=>{changeLanguage('fr'); setOpenMobile(false)}}>
+                                <img src={fr} alt={"fr"} width={20}/>{t('fr')}
+                            </button>
+                            <button type="button" className={`mobile-lang-btn ${i18n.language==='en' ? 'is-active' : ''}`} onClick={()=>{changeLanguage('en'); setOpenMobile(false)}}>
+                                <img src={usa} alt={"en"} width={20}/>{t('en')}
+                            </button>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </>
     )
 }

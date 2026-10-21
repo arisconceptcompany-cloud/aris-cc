@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import unique from '../../Asset/SolutionUnique.jpg'
 import acc from '../../Asset/Accompagnement.jpg'
 import prix from '../../Asset/BestPrice.jpg'
@@ -12,38 +12,66 @@ import condition from '../../Asset/condition.jpg'
 import equipement from '../../Asset/equipement.jpg'
 import DetailAvantage from "./DetailAvantage";
 import {useTranslation} from "react-i18next";
-import ViewContent from "../../FunctionComponent/ViewContent";
 import H4Avantage from "./H4Avantage";
+import './Avantage.css';
+
+const GROUPS = [
+    {
+        title: 'Service',
+        items: [
+            {image: unique, title: 'solUn', text: 'solContent'},
+            {image: acc, title: 'engTitle', text: 'engContent'},
+            {image: prix, title: 'prix', text: 'prixContent'},
+            {image: flex, title: 'flex', text: 'flexContent'},
+        ],
+    },
+    {
+        title: 'staff',
+        items: [
+            {image: innovant, title: 'innovT', text: 'innovC'},
+            {image: comp, title: 'compT', text: 'compC'},
+            {image: qual, title: 'qual', text: 'qualC'},
+        ],
+    },
+    {
+        title: 'company',
+        items: [
+            {image: formation, title: 'formT', text: 'formC'},
+            {image: condition, title: 'condT', text: 'condC'},
+            {image: equipement, title: 'equiT', text: 'equiC'},
+            {image: stable, title: 'stabT', text: 'stabC'},
+        ],
+    },
+];
 
 const Equipement = () => {
     const {t}=useTranslation()
-    const [viewContent, setViewContent] = useState(false);
     return(
-        <>
-            <ViewContent className="w-100 m-0 p-3" time={50} setIsVisible={setViewContent}>
-                <span className={`display-4 d-inline-block text-concept fw-bold ${viewContent ? 'showTop' : 'invisible'}`}>{t('withUs')}</span>
-                <H4Avantage text={'Service'}/>
-                <div className="mt-3 w-100 mb-2 p-0">
-                    <DetailAvantage emplacement={0} image={unique} title={t('solUn')} text={t('solContent')}/>
-                    <DetailAvantage emplacement={1} image={acc} title={t('engTitle')} text={t('engContent')}/>
-                    <DetailAvantage emplacement={2} image={prix} title={t('prix')} text={t('prixContent')}/>
-                    <DetailAvantage emplacement={3} image={flex} title={t('flex')} text={t('flexContent')}/>
-                </div>
-                <H4Avantage text={t('staff')}/>
-                <div className="mt-3 w-100 mb-2 p-0">
-                    <DetailAvantage emplacement={0} image={innovant} title={t('innovT')} text={t('innovC')}/>
-                    <DetailAvantage emplacement={1} image={comp} title={t('compT')} text={t('compC')}/>
-                    <DetailAvantage emplacement={2} image={qual} title={t('qual')} text={t('qualC')}/>
-                </div>
-                <H4Avantage text={t('company')}/>
-                <div className="mt-2 w-100 mb-2 p-0">
-                    <DetailAvantage emplacement={0} image={formation} title={t('formT')} text={t('formC')}/>
-                    <DetailAvantage emplacement={1} image={condition} title={t('condT')} text={t('condC')}/>
-                    <DetailAvantage emplacement={2} image={equipement} title={t('equiT')} text={t('equiC')}/>
-                    <DetailAvantage emplacement={3} image={stable} title={t('stabT')} text={t('stabC')}/>
-                </div>
-            </ViewContent>
-        </>
+        <section className="av-section">
+            <div className="av-container">
+                <p className="av-lead">
+                    {t('withUs')}
+                </p>
+
+                {GROUPS.map((group, gi) => (
+                    <div className="av-group" key={group.title}>
+                        <H4Avantage text={t(group.title)}/>
+                        <div className="av-rows">
+                            {group.items.map((item, i) => (
+                                <DetailAvantage
+                                    key={item.title}
+                                    index={i}
+                                    reverse={i % 2 === 1}
+                                    image={item.image}
+                                    title={t(item.title)}
+                                    text={t(item.text)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
     )
 }
 

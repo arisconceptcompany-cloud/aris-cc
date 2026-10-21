@@ -6,18 +6,39 @@
     font-style: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: 'Gilroy';
+    src: url('./fonts/Gilroy-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+:root {
+    --font-title: 'Gilroy', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    --font-body: 'Quicksand', 'Ramona', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
 html {
     scroll-behavior: smooth;
     transition: all 300ms ease-in-out;
 }
 body {
     margin: 0;
-    font-family: "Ramona", serif !important;
+    font-family: var(--font-body) !important;
     width: 100%;
     overflow-x: hidden !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     height: 100%;
+}
+h1, h2, h3, h4, h5, h6,
+.brand-name {
+    font-family: var(--font-title);
+}
+.navbar-aris,
+.navbar-link,
+.mobile-menu-modal,
+.mobile-menu-link {
+    font-family: var(--font-body);
 }
 .p-6{
     padding-top: 5rem !important;
@@ -41,48 +62,38 @@ body {
     cursor: pointer;
 }
 .btn-header:hover{
-    transform: scale(1.1) !important;
-    transition: all 0.5s ease-in-out !important;
+    transition: color 180ms ease !important;
 }
 .btn-content:hover{
-    transform: translateY(-5px) !important;
-    transition: all 0.3s ease-in-out !important;
+    transition: background-color 180ms ease !important;
 }
 
 @keyframes slideOutToRight {
     0% {
-        transform: translateX(-100%) scale(0.2);
         opacity: 0;
-    }
-    50%{
-        opacity: 1;
-        transform: scale(1.1);
+        transform: translateX(-12px);
     }
     100% {
-        transform: translateX(0) scale(1);
+        transform: translateX(0);
         opacity: 1;
     }
 }
 .slideOutToRight {
-    animation: slideOutToRight 2s ease-in-out forwards;
+    animation: slideOutToRight 0.5s ease-out forwards;
 }
 
 @keyframes preAnimation {
     0% {
         opacity: 0;
-        transform: translateX(200%);
-    }
-    50%{
-        transform: scale(1.1) translateX(0);
-        opacity: 0.5;
+        transform: translateY(10px);
     }
     100% {
         opacity: 1;
-        transform: scale(1) translateX(0);
+        transform: translateY(0);
     }
 }
 .preAnimation {
-    animation: preAnimation 2s ease-in-out forwards;
+    animation: preAnimation 0.5s ease-out forwards;
 }
 
 .color-cyan{
@@ -163,7 +174,7 @@ body {
 
 .btn-style:hover {
     background: linear-gradient(90deg, rgba(209, 13, 88, 0.87), #0e8de8)!important;
-    transform: scale(1.06) !important;
+    transform: translateY(-2px) !important;
 }
 
 .btn-style:active {
@@ -291,32 +302,212 @@ div >a{
     letter-spacing: 0.065rem;
 }
 
-@keyframes wave {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-.wave-effect span {
-    display: inline-block;
-    animation: wave 0.5s ease-in-out forwards;
-}
-
 @keyframes showBottom {
     0% {
-        transform: translateY(20px);
+        opacity: 0;
+        transform: translateY(12px);
     }
     100% {
+        opacity: 1;
         transform: translateY(0);
     }
 }
 
 .showBottom {
-    animation: showBottom 1s ease-in-out forwards;
+    animation: showBottom 0.5s ease-out forwards;
 }
 .w-50-rem{
     width: calc(50% + 2rem);
+}
+/* ================= ================= =================
+   SYSTÈME DE BOUTONS MODERNE
+   ================= ================= ================= */
+
+.btn {
+    --btn-radius: 14px;
+    border-radius: var(--btn-radius) !important;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.55rem 1.35rem;
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(17, 113, 239, 0.35);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-lg {
+    --btn-radius: 16px;
+    padding: 0.75rem 1.9rem;
+    font-size: 1.05rem;
+}
+
+.btn-sm {
+    --btn-radius: 10px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.85rem;
+}
+
+.btn-pill,
+.btn.rounded-pill {
+    --btn-radius: 999px;
+}
+
+/* --- gradient principal (rose -> bleu) --- */
+.btn-primary {
+    background: linear-gradient(120deg, #D10D58 0%, #1171ef 100%);
+    border: 1px solid transparent;
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(17, 113, 239, 0.25);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: linear-gradient(120deg, #b80b4d 0%, #0d5fc9 100%);
+    color: #fff;
+    box-shadow: 0 12px 26px rgba(17, 113, 239, 0.35);
+}
+
+.btn-primary:disabled,
+.btn-primary.disabled {
+    background: linear-gradient(120deg, #D10D58 0%, #1171ef 100%);
+    opacity: 0.55;
+    box-shadow: none;
+}
+
+/* --- cyan / info --- */
+.btn-info {
+    background: linear-gradient(120deg, #00B0BE 0%, #0e8de8 100%);
+    border: 1px solid transparent;
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(0, 176, 190, 0.25);
+}
+
+.btn-info:hover,
+.btn-info:focus {
+    background: linear-gradient(120deg, #009aa7 0%, #0b78c8 100%);
+    color: #fff;
+    box-shadow: 0 12px 26px rgba(0, 176, 190, 0.35);
+}
+
+/* --- light (contour subtil) --- */
+.btn-light {
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    color: #101828;
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+}
+
+.btn-light:hover {
+    background: #f8fafc;
+    border-color: rgba(17, 113, 239, 0.4);
+    color: #1171ef;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+}
+
+/* --- dark --- */
+.btn-dark {
+    background: #0f172a;
+    border: 1px solid transparent;
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+}
+
+.btn-dark:hover {
+    background: #1e293b;
+    color: #fff;
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.32);
+}
+
+/* --- warning / danger adoucis --- */
+.btn-warning {
+    background: linear-gradient(120deg, #f59f00, #f08c00);
+    border: 1px solid transparent;
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(245, 159, 0, 0.28);
+}
+
+.btn-warning:hover {
+    background: linear-gradient(120deg, #e08c00, #dc8200);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(245, 159, 0, 0.35);
+}
+
+.btn-danger {
+    background: linear-gradient(120deg, #f5365c, #e0244c);
+    border: 1px solid transparent;
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(245, 54, 92, 0.25);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(120deg, #e02e52, #c81d43);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(245, 54, 92, 0.32);
+}
+
+/* --- outline modernes --- */
+.btn-outline-info {
+    border-width: 2px;
+    color: #00B0BE;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.btn-outline-info:hover {
+    background: #00B0BE;
+    border-color: #00B0BE;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 176, 190, 0.3);
+}
+
+.btn-outline-success {
+    border-width: 2px;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.btn-outline-success:hover {
+    background: #2f9e44;
+    border-color: #2f9e44;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(47, 158, 68, 0.3);
+}
+
+/* --- boutons pleine largeur (formulaires) --- */
+.btn.w-100 {
+    box-shadow: 0 8px 18px rgba(17, 113, 239, 0.18);
+}
+
+/* --- CTA hero (glass) --- */
+.btn-style {
+    border-radius: 999px !important;
+    background: rgba(15, 23, 42, 0.55) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.btn-style:hover {
+    background: linear-gradient(120deg, rgba(209, 13, 88, 0.92), rgba(14, 141, 232, 0.92)) !important;
+    border-color: transparent !important;
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(209, 13, 88, 0.35);
+}
+
+.btn-style:active {
+    transform: translateY(-1px);
 }

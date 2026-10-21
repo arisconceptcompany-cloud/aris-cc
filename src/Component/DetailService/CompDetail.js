@@ -8,6 +8,7 @@ import {useTranslation} from "react-i18next";
 import H4Avantage from "../NosAvantage/H4Avantage";
 import ViewContent from "../../FunctionComponent/ViewContent";
 import ViewDesc from "./ViewDesc";
+import {FaMinus} from "react-icons/fa6";
 
 const CompDetail = ({element,parent}) => {
     const {lang}=useParams()
@@ -50,7 +51,7 @@ const CompDetail = ({element,parent}) => {
                         </p>
                         <ViewContent setIsVisible={setVSpan} time={250}>
                              <span className={`display-6 ms-3 color-cyan d-inline-block ${vSpan ? 'arrow-div' : 'invisible'}`}>
-                                <i className="me-1 fa fa-minus"/>{t('respD')}
+                                <FaMinus className="me-1"/>{t('respD')}
                              </span>
                         </ViewContent>
                         <ViewContent setIsVisible={setVUl} time={250}>

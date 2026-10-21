@@ -1,6 +1,7 @@
 import React from "react";
+import {FaCircleExclamation} from "react-icons/fa6";
 import './Style.css'
-import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 const BodyError = () => {
     return (
@@ -12,7 +13,7 @@ const BodyError = () => {
                             <div className="text-center">
                                 <h2 className="d-flex justify-content-center align-items-center gap-2 mb-4">
                                     <span className="display-1 fw-bold">4</span>
-                                    <i className="bi bi-exclamation-circle-fill text-danger display-4"/>
+                                    <FaCircleExclamation className="text-danger display-4"/>
                                     <span className="display-1 fw-bold bsb-flip-h">4</span>
                                 </h2>
                                 <h3 className="h2 mb-2">Oops! You're lost.</h3>

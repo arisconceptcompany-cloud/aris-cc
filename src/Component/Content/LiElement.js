@@ -1,5 +1,6 @@
 import React, {useCallback, useState} from "react";
 import StepLi from "../../FunctionComponent/StepLi";
+import {FaRegCircleDot} from "react-icons/fa6";
 
 const LiElement = ({lang,jobDetail, isVisible, index}) => {
     const [visible,setVisible]=useState(false)
@@ -8,9 +9,9 @@ const LiElement = ({lang,jobDetail, isVisible, index}) => {
     },[])
     return(
         <StepLi index={index} isVisible={isVisible} setTurnOn={setVisible}>
-            <li onClick={()=>handleClick(`/${lang}/service/${jobDetail.parentId}/${jobDetail.id}`)} className={`cursor-pointer scale ${visible ? 'showTop visible' : 'invisible'}`}>
-                <a onClick={(e)=>e.preventDefault()} href={`/${lang}/service/${jobDetail.parentId}/${jobDetail.id}`} className="text-decoration-none w-100 h-100 text-dark">
-                    <span> <i className="far fa-dot-circle text-aris me-1"/>{jobDetail.title[lang]}</span>
+            <li onClick={()=>handleClick(`/${lang}/service/${jobDetail.parentId}/${jobDetail.id}`)} className={`ac-job-item ${visible ? 'showTop visible' : 'invisible'}`}>
+                <a onClick={(e)=>e.preventDefault()} href={`/${lang}/service/${jobDetail.parentId}/${jobDetail.id}`}>
+                    <span> <FaRegCircleDot className="ac-job-dot"/>{jobDetail.title[lang]}</span>
                 </a>
             </li>
         </StepLi>

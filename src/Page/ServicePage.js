@@ -2,7 +2,7 @@ import React from 'react'
 import InfoService from "../Component/Head/InfoService";
 import HeaderContent from "../Component/Head/HeaderContent";
 import AccueilFooter from "../Component/Footer/AccueilFooter";
-import AllService from "../Component/Body/AllService";
+import ServiceGrid from "../Component/Body/ServiceGrid";
 import {Helmet} from "react-helmet";
 import {useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
@@ -29,7 +29,7 @@ const ServicePage = () => {
             </Helmet>
             <HeaderContent active={2}/>
             <InfoService/>
-            <AllService/>
+            <ServiceGrid/>
             <AccueilFooter/>
         </>
     )

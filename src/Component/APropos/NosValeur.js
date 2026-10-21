@@ -3,36 +3,60 @@ import integite from '../../Asset/intergrite.jpg'
 import excellent from '../../Asset/exelent.jpg'
 import eng from '../../Asset/engagementClient.jpg'
 import giv from '../../Asset/giveJob.jpg'
-import {useMediaQuery} from "react-responsive";
-import ValeurE from "./ValeurE";
 import {useTranslation} from "react-i18next";
 import ViewContent from "../../FunctionComponent/ViewContent";
-const NosValeur = () => {
-    const wMin=useMediaQuery({query: "(max-width: 768px)"})
-    const {t} = useTranslation()
+import './AproposModern.css';
 
-    const [viewList, setViewList] = useState(false);
-    const [viewSpan, setViewSpan] = useState(false);
-    const [viewP, setViewP] = useState(false);
+const VALUE_ITEMS = [
+    {img: integite, title: 'inT', text: 'inTP'},
+    {img: excellent, title: 'excellence', text: 'exP'},
+    {img: eng, title: 'engT', text: 'eng'},
+    {img: giv, title: 'respP', text: 'respT'},
+];
+
+const ValueRow = ({index, image, title, text, reverse}) => {
+    const [view, setView] = useState(false);
     return (
-        <>
-            <div className="mx-0 mb-2 mt-3 w-100 p-3">
-                <div className={`${wMin ? 'w-100 p-0 m-0' : 'container'}`}>
-                    <ViewContent className="row p-0 m-0 border-aris" setIsVisible={setViewSpan} time={100}>
-                        <span className={`display-6 text-aris title width-max ${viewSpan ? 'showTop' : 'invisible'}`}>{t('valeur')}</span>
-                    </ViewContent>
-                   <ViewContent className="row mx-0 mt-3 mb-2 p-0" setIsVisible={setViewP} time={150}>
-                       <p className={`fs-5 mb-0 ${viewP ? 'showTop' : 'invisible'}`}>{t('p1Valeur')}</p>
-                   </ViewContent>
-                    <ViewContent time={150} setIsVisible={setViewList}>
-                        <ValeurE isVisible={viewList} emplacement={0} ind={0} text={t('inTP')} img={integite} title={t('inT')}/>
-                        <ValeurE isVisible={viewList} emplacement={1} ind={5} text={t('exP')} img={excellent} title={'Excellence'}/>
-                        <ValeurE isVisible={viewList} emplacement={2} ind={8} text={t('eng')} img={eng} title={t('engT')}/>
-                        <ValeurE isVisible={viewList} emplacement={3} ind={11} text={t('respT')} img={giv} title={t('respP')}/>
-                    </ViewContent>
+        <ViewContent
+            className={`apv-row ${reverse ? 'apv-row-reverse' : ''} ${view ? '' : 'invisible'}`}
+            time={90}
+            setIsVisible={setView}
+        >
+            <div className="apv-media">
+                <img src={image} decoding={"async"} alt={title}/>
+            </div>
+            <div className="apv-content">
+                <span className="apv-num">{String(index + 1).padStart(2, '0')}</span>
+                <h3 className="apv-title">{title}</h3>
+                <p className="apv-text">{text}</p>
+            </div>
+        </ViewContent>
+    );
+};
+
+const NosValeur = () => {
+    const {t} = useTranslation()
+    return (
+        <section className="ap-section">
+            <div className="ap-container">
+                <h2 className="ap-heading">{t('valeur')}</h2>
+                <div className="ap-underline"/>
+                <p className="ap-intro">{t('p1Valeur')}</p>
+
+                <div className="apv-list">
+                    {VALUE_ITEMS.map((item, index) => (
+                        <ValueRow
+                            key={item.title}
+                            index={index}
+                            reverse={index % 2 === 1}
+                            image={item.img}
+                            title={item.title === 'excellence' ? 'Excellence' : t(item.title)}
+                            text={t(item.text)}
+                        />
+                    ))}
                 </div>
             </div>
-        </>
+        </section>
     )
 }
 export default NosValeur

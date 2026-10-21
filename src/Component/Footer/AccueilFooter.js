@@ -1,11 +1,14 @@
 import React, {useCallback, useState} from "react";
 import IconFooter from "./IconFooter";
 import logo from "../../Asset/icon.png";
+import logoYour from '../../Asset/YourAndOur.png'
 import {useTranslation} from "react-i18next";
 import { useParams} from "react-router-dom";
-import {useMediaQuery} from "react-responsive";
-import logoYour from '../../Asset/YourAndOur.png'
+import {FaArrowRight, FaEnvelope, FaLocationDot, FaLinkedinIn, FaPhone, FaWhatsapp, FaFacebookF} from "react-icons/fa6";
+import {IoMdCheckmark} from "react-icons/io";
+import Newsletter from "../../Model/Newsletter.ts";
 import ViewContent from "../../FunctionComponent/ViewContent";
+import './FooterModern.css'
 
 const AccueilFooter = () => {
     const handleClick = useCallback((e) => {
@@ -16,196 +19,139 @@ const AccueilFooter = () => {
     const [isIconVisible, setIsIconVisible] = useState(false);
     const { t } = useTranslation();
     const {lang}=useParams()
-    const minW=useMediaQuery({query: "(max-width: 1180px)"})
-    const wInter=useMediaQuery({query: "(max-width: 1073px)"})
-    const wMin=useMediaQuery({query: "(max-width: 637px)"})
-    const footM=useMediaQuery({query: "(max-width: 651px)"})
+
+    const [email, setEmail] = useState('')
+    const [status, setStatus] = useState('idle')
+
+    const submitNewsletter = useCallback((e) => {
+        e.preventDefault()
+        if (!email.trim() || status === 'loading') return
+        setStatus('loading')
+        Newsletter.sendDataToAdmin('Newsletter', email.trim())
+            .then((ok) => {
+                setStatus(ok ? 'success' : 'error')
+                if (ok) setEmail('')
+            })
+            .catch(() => setStatus('error'))
+    }, [email, status])
+
+    const contactItems = [
+        {icon: FaLocationDot, label: 'Iavoloha, Antananarivo 102', href: 'https://maps.app.goo.gl/5hp5qcinzUmxCbaj8', color: 'footer-ic-pink'},
+        {icon: FaPhone, label: '+261 38 12 379 96', href: 'https://wa.me/+261381237996', color: 'footer-ic-blue'},
+        {icon: FaEnvelope, label: 'contact@aris-cc.com', href: 'mailto:contact@aris-cc.com', color: 'footer-ic-cyan', onClick: handleClick},
+    ]
+
+    const socials = [
+        {icon: FaFacebookF, href: 'https://www.facebook.com', label: 'Facebook', color: 'social-facebook'},
+        {icon: FaLinkedinIn, href: 'https://www.linkedin.com/in/aris-concept-company-567703240', label: 'LinkedIn', color: 'social-linkedin'},
+        {icon: FaWhatsapp, href: 'https://wa.me/+261381237996', label: 'WhatsApp', color: 'social-whatsapp'},
+        {icon: FaPhone, href: 'tel:+261381237996', label: 'Téléphone', color: 'social-phone'},
+    ]
+
+    const expertiseLinks = [
+        {key: 'dna', href: `/${lang}/#adn`, external: true},
+        {key: 'info', href: `/${lang}/service#info`},
+        {key: 'marketing', href: `/${lang}/service#web-marketing`},
+        {key: 'compta', href: `/${lang}/service#accounting`},
+        {key: 'ext', href: `/${lang}/service#ext`},
+        {key: 'rh', href: `/${lang}/service#hr`},
+    ]
+
     return (
         <>
             <IconFooter isVisible={!isIconVisible}/>
-            <ViewContent className="m-0 p-0 w-100 bg-dark-blue text-white small" time={350} setIsVisible={setIsIconVisible}>
-                <div className="row w-100 mx-0 mt-2 mb-0 pt-4 px-3 border-bottom">
-                    <div className={`${wInter ? 'col-12' : 'col-6'}`}>
-                        <div className="w-100 d-inline-flex align-items-center ">
-                            <img src={logo} alt="Aris Concept" className="img-fluid me-3" width={40}/>
-                            <h4 className="mb-0 fs-2 fw-bold">
-                                <strong style={{ color: '#D10D58' }}>Aris </strong> <strong style={{ color: '#0e8de8' }}>Concept</strong>
-                            </h4>
+            <ViewContent className="m-0 p-0 w-100" time={200} setIsVisible={setIsIconVisible}>
+            <footer className="footer-modern">
+                <div className="footer-wave" aria-hidden="true"/>
+                <div className="container-fluid px-lg-5 px-md-3 px-3">
+                    <div className="row gy-4 mx-0 pt-5">
+
+                        <div className="col-lg-4 col-md-6 col-12">
+                            <div className="d-inline-flex align-items-center mb-3">
+                                <img src={logo} alt="Aris Concept" width={40} className="me-2"/>
+                                <h4 className="mb-0 fs-3 fw-bold">
+                                    <span className="brand-aris">Aris </span><span className="brand-concept">Concept</span>
+                                </h4>
+                            </div>
+                            <p className="footer-desc">{t('descFooter')}</p>
+                            <h5 className="footer-title-sm mt-4 mb-3">{t('ctnUs')}</h5>
+                            <ul className="footer-contact list-unstyled mb-0">
+                                {contactItems.map(({icon: Icon, label, href, color, onClick}) => (
+                                    <li key={label} className="mb-2">
+                                        <a href={href} onClick={onClick} target="_blank" rel="noopener noreferrer" className="footer-contact-link">
+                                            <span className={`footer-contact-ic ${color}`}><Icon size={15}/></span>
+                                            <span>{label}</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
 
-                        <div className="w-100 mt-3 mb-3">
-                            <span className="fs-5 fw-bolder text-uppercase text-aris">{t('ctnUs')}</span>
-                            <div className="w-100 mt-2 p-2">
-                                {wMin ? (
-                                    <ul className="list-unstyled">
-                                        <li className="text-jaune fw-bold d-flex align-items-center mb-2">
-                                            <span className="icon me-1">+</span>
-                                            <span className="fw-bolder txt-at">{t('way')}</span>
-                                        </li>
-                                        <li className="mb-2">
-                                            <a href="https://maps.app.goo.gl/5hp5qcinzUmxCbaj8" target="_blank" rel="noopener noreferrer" className="link-primary email-link cursor-pointer">
-                                                <i className="fa-solid fa-location-dot me-2 color-aris"/>
-                                                Iavoloha, Antananarivo 102
-                                            </a>
-                                        </li>
-                                        <li className="mb-2">
-                                            <a href="https://wa.me/+261381237996" target="_blank" rel="noopener noreferrer" className="email-link link-primary cursor-pointer">
-                                                <i className="fa-brands fa-whatsapp me-2 color-cyan"/>
-                                                +261 38 12 379 96
-                                            </a>
-                                        </li>
-                                        <li className="mb-2">
-                                            <a href={`mailto:${'contact@aris-cc.com'}`} onClick={handleClick} className="email-link link-primary cursor-pointer">
-                                                <i className="fa-regular fa-envelope me-2 text-white"/>
-                                                contact@aris-cc.com
-                                            </a>
-                                        </li>
-
-                                        <li className="mb-2">
-                                            <a href="https://www.linkedin.com/in/aris-concept-company-567703240" target="_blank" rel="noreferrer" className="email-link link-primary cursor-pointer">
-                                                <i className="fa-brands fa-linkedin me-2 in-color"/>
-                                                LinkedIn
-                                            </a>
-                                        </li>
-                                    </ul>
-                                ) : (
-                                    <div className="d-flex w-100 justify-content-between">
-                                        {!minW && (
-                                            <div className="d-inline-flex text-jaune fw-bold">
-                                                <span className="icon me-1">+</span>
-                                                <span className="fw-bolder txt-at">{t('way')}</span>
-                                            </div>
-                                        )}
-                                        <div>
-                                            <a href="https://maps.app.goo.gl/5hp5qcinzUmxCbaj8" target="_blank" rel="noopener noreferrer" className="link-primary email-link cursor-pointer">Iavoloha, Antananarivo 102</a>
-                                        </div>
-                                        <div>
-                                            <a href="https://wa.me/+261381237996" target="_blank" rel="noopener noreferrer" className="ms-2 email-link link-primary cursor-pointer">+261 38 12 379 96</a>
-                                        </div>
-                                        <div>
-                                            <a href={`mailto:${'contact@aris-cc.com'}`} onClick={handleClick} className="ms-2 email-link link-primary cursor-pointer">contact@aris-cc.com</a>
-                                        </div>
-                                        {wInter && (
-                                            <div>
-                                                <a href="https://www.linkedin.com/in/aris-concept-company-567703240" target="_blank" rel="noreferrer" className="email-link link-primary cursor-pointer">
-                                                    LinkedIn
-                                                </a>
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
+                        <div className="col-lg-3 col-md-6 col-12">
+                            <h5 className="footer-title mb-3">{t('domaine')}</h5>
+                            <ul className="footer-links list-unstyled mb-0">
+                                {expertiseLinks.map(({key, href, external}) => (
+                                    <li key={key} className="mb-1">
+                                        <a href={href} className="footer-link">
+                                            {t(key)}
+                                            {external && <FaArrowRight className="footer-link-arrow" size={10}/>}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className="footer-socials mt-4 d-flex gap-2">
+                                {socials.map(({icon: Icon, href, label, color}) => (
+                                    <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={`footer-social ${color}`}>
+                                        <Icon size={15}/>
+                                    </a>
+                                ))}
                             </div>
                         </div>
-                        <div className="w-100 mx-0 mb-3 mt-1 p-0 h-auto ">
-                            <div className="d-flex align-items-center justify-content-center mb-2">
-                                <div className="flex-grow-1 mx-1 bg-aris rounded-2" style={{height: '3px', maxWidth: '130px'}}/>
-                                <span className="text-aris" style={{fontSize: '1.35rem'}}>{t('join')}</span>
-                                <div className="flex-grow-1 mx-1 bg-aris rounded-2" style={{height: '3px', maxWidth: '130px'}}/>
-                            </div>
-                            <div className="d-flex justify-content-center gap-2 mb-2 pb-3 border-bottom">
-                                <span className="rounded-circle span-icon d-flex"  onClick={() => window.open("https://www.facebook.com", "_blank")} >
-                                     <i className="bi bi-facebook icon-media m-auto pt-1 text-primary"/>
-                                </span>
-                                <span className="span-icon rounded-circle d-flex"  onClick={() => window.open("https://www.linkedin.com/in/aris-concept-company-567703240", "_blank")} >
-                                     <i className="bi bi-linkedin icon-media m-auto pt-1 in-color"/>
-                                </span>
-                                <span className="span-icon rounded-circle d-flex" onClick={() => window.open("https://wa.me/+261381237996", "_blank")}>
-                                    <i className="bi bi-whatsapp icon-media m-auto pt-1 text-success"/>
-                                </span>
-                                <span className="span-icon rounded-circle d-flex" onClick={() => window.open("tel:+261381237996", "_blank")}>
-                                     <i className="bi bi-phone-fill icon-media m-auto pt-1 color-semi-purpule"/>
-                                </span>
-                            </div>
-                            {!wInter && (
-                                <div className="mx-0 mt-3 mb-0 p-2 w-100 d-inline-flex justify-content-between">
-                                    <div className=" text-light d-inline-flex">
-                    <span className="pb-1">
-                        © {new Date().getFullYear()} Aris Concept
-                        <i className="mx-2 fa fa-minus"/>
-                                <span>{t('droit')}</span>
-                        <i className="mx-2 fa fa-minus"/>
-                        <span className="cursor-pointer">{t('mention')}</span>
-                        <i className="mx-2 fa fa-minus"/>
-                        <span className="cursor-pointer">{t('politique')}</span>
-                    </span>
-                                    </div>
+
+                        <div className="col-lg-5 col-md-12 col-12">
+                            <div className="d-flex align-items-start justify-content-between flex-wrap gap-2">
+                                <div>
+                                    <h5 className="footer-title mb-2">Newsletter</h5>
+                                    <p className="footer-desc mb-0">{t('inscrire')}</p>
                                 </div>
-                            )}
-                        </div>
-                    </div>
-                    <div className={`${wMin ? 'col-12' : wInter ? 'col-6 mt-2' : 'col-3'}`}>
-                        <h4 className="fs-3 mb-3 text-start">{t('domaine')}</h4>
-                        <ul className="list-group m-0 p-0 bg-transparent list-group-flush">
-                            <li className="list-group-item bg-transparent text-white border-0 cursor-pointer">
-                                <a href={`/${lang}/#adn`} className="letter-spacing fw-bolder p-0 m-0 text-jaune">{t('dna')}<i className="ms-1 fa fa-arrow-up-right-from-square small" style={{transform: 'translateY(-4px)'}}/></a>
-                            </li>
-                            <li className="list-group-item bg-transparent cursor-pointer text-white d-inline-flex justify-content-between border-0">
-                                <a href={`/${lang}/service#info`} className="fw-bolder p-0 m-0 letter-spacing">{t('info')}</a>
-                            </li>
-                            <li className="list-group-item bg-transparent text-white border-0 cursor-pointer">
-                                <a href={`/${lang}/service#web-marketing`} className="letter-spacing fw-bolder p-0 m-0">{t('marketing')}</a>
-                            </li>
-                            <li className="list-group-item bg-transparent text-white border-0 cursor-pointer">
-                                <a href={`/${lang}/service#accounting`} className="letter-spacing fw-bolder p-0 m-0">{t('compta')}</a>
-                            </li>
-                            <li className="list-group-item bg-transparent text-white border-0 cursor-pointer">
-                                <a href={`/${lang}/service#ext`} className="letter-spacing fw-bolder p-0 m-0">{t('ext')}</a>
-                            </li>
-                            <li className="list-group-item bg-transparent text-white border-0 mb-2 cursor-pointer">
-                                <a href={`/${lang}/service#hr`} className="letter-spacing fw-bolder p-0 m-0">{t('rh')}</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className={`${wMin ? 'col-12 p-1 mt-2' : wInter ? 'col-6 p-1 mt-2' : 'col-3 p-0 me-0'}`}>
-                        <div className="w-100 justify-content-between row m-0 p-0 mb-1">
-                            <div className="col-7">
-                                <p className="" style={{fontSize: '0.875rem', lineHeight: '1.35rem'}}>{t('descFooter')}</p>
+                                <img src={logoYour} decoding={"async"} height={90} draggable={"false"} alt="" className="footer-badge-img"/>
                             </div>
-                            <div className="col-5 d-flex align-items-center">
-                                <img src={logoYour} decoding={"async"} height={120} draggable={"false"} alt=""/>
+
+                            <form className="footer-newsletter mt-3" onSubmit={submitNewsletter} autoComplete="off">
+                                <span className="footer-newsletter-ic"><FaEnvelope size={15}/></span>
+                                <input
+                                    type="email"
+                                    className="footer-newsletter-input"
+                                    placeholder="votre@email.com"
+                                    aria-label="e-mail"
+                                    value={email}
+                                    onChange={(e)=>setEmail(e.target.value)}
+                                    required
+                                />
+                                <button type="submit" className="footer-newsletter-btn" aria-label="S'inscrire" disabled={status==='loading'}>
+                                    {status === 'success' ? <IoMdCheckmark size={18}/> : <FaArrowRight size={14}/>}
+                                </button>
+                            </form>
+                            {status === 'success' && <p className="footer-newsletter-msg success">{t('sucMes')}</p>}
+                            {status === 'error' && <p className="footer-newsletter-msg error">{t('probConnex')}</p>}
+
+                            <div className="d-flex align-items-center gap-2 mt-4 pt-2">
+                                <div className="footer-line flex-grow-1"/>
+                                <span className="footer-join">{t('join')}</span>
+                                <div className="footer-line flex-grow-1"/>
                             </div>
                         </div>
-                        <h4 className="ms-2 mt-1 mb-1 color-cyan">
-                            Newsletter
-                        </h4>
-                        <div className="mb-2">
-                            <p className="mb-0" style={{letterSpacing: '0.055rem'}}>{t('inscrire')}</p>
-                            <div className="email-container border-bottom mt-2 w-100 d-inline-flex justify-content-between py-2 px-1 align-items-center">
-                                <label className="email-label" htmlFor="email">
-                                    e-mail
-                                </label>
-                                <input type="email" id="email" autoComplete={"off"} className="email-input" aria-label="e-mail"/>
-                                <span className="email-arrow pe-1 cursor-pointer">
-                                    <i className="fa-solid fa-arrow-right-long"/>
-                                </span>
-                            </div>
+                    </div>
+
+                    <div className="footer-bottom mt-4 py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                        <span>© {new Date().getFullYear()} Aris Concept — {t('droit')}</span>
+                        <div className="d-flex flex-wrap gap-3">
+                            <span className="footer-legal cursor-pointer">{t('mention')}</span>
+                            <span className="footer-legal cursor-pointer">{t('politique')}</span>
                         </div>
                     </div>
                 </div>
-                {wInter && (
-                    <div className="m-0 p-2 w-100 d-inline-flex justify-content-between">
-                        <div className=" text-light d-inline-flex">
-                    <span className="pb-1">
-                        © {new Date().getFullYear()} Aris Concept
-                        {footM && (
-                            <>
-                                <i className="mx-2 fa fa-minus"/>
-                                <span>{t('droit')}</span>
-                            </>
-                        )}
-                        <i className="mx-2 fa fa-minus"/>
-                        <span className="cursor-pointer">{t('mention')}</span>
-                        <i className="mx-2 fa fa-minus"/>
-                        <span className="cursor-pointer">{t('politique')}</span>
-                    </span>
-                        </div>
-                        {!footM && (
-                            <div className=" text-light pb-1">
-                                <span>{t('droit')}</span>
-                            </div>
-                        )}
-                    </div>
-                )}
+            </footer>
             </ViewContent>
         </>
     )

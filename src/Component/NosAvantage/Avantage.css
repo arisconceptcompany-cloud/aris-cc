@@ -1,0 +1,247 @@
+/* ================= HERO AVANTAGE ================= */
+.av-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 9rem 1.5rem 4.5rem;
+    background:
+        radial-gradient(900px 380px at 12% -10%, rgba(209, 13, 88, 0.35), transparent 60%),
+        radial-gradient(900px 420px at 92% 20%, rgba(14, 141, 232, 0.38), transparent 62%),
+        linear-gradient(120deg, #0c1830 0%, #16264a 48%, #0e2a52 100%);
+    color: #fff;
+    text-align: center;
+    scroll-margin-top: 84px;
+}
+
+.av-hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.av-hero-title {
+    font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.22;
+    margin: 0 0 0.9rem;
+}
+
+.av-hero-sub {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: rgba(226, 232, 240, 0.85);
+    margin: 0;
+    font-style: italic;
+}
+
+/* ================= SECTION ================= */
+.av-section {
+    background: linear-gradient(180deg, #f7f9fd 0%, #ffffff 45%, #f4f7fc 100%);
+    padding: 3.5rem 1.25rem 4.5rem;
+}
+
+.av-container {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.av-lead {
+    text-align: center;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #101828;
+    margin: 0 0 3rem;
+}
+
+.av-lead .av-brand-aris {
+    color: #D10D58;
+}
+
+.av-lead .av-brand-concept {
+    color: #0e8de8;
+}
+
+/* ---------- group heading ---------- */
+.av-group {
+    margin-bottom: 3.5rem;
+}
+
+.av-group-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.av-group-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(209, 13, 88, 0.1);
+    color: #D10D58;
+    flex-shrink: 0;
+}
+
+.av-group-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #101828;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.av-group-line {
+    flex: 1;
+    height: 1px;
+    margin-left: 0.5rem;
+    background: linear-gradient(90deg, rgba(209, 13, 88, 0.35), rgba(14, 141, 232, 0.04));
+}
+
+/* ---------- editorial rows ---------- */
+.av-rows {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.75rem;
+}
+
+.av-row {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.av-rows .av-row:last-child {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.av-row.invisible {
+    opacity: 0;
+    transform: translateY(26px);
+}
+
+/* reversed row: media on the right */
+.av-row-reverse {
+    grid-template-columns: 1fr 300px;
+}
+
+.av-row-reverse .av-row-media {
+    order: 2;
+}
+
+.av-row-reverse .av-row-content {
+    order: 1;
+}
+
+/* image side */
+.av-row-media {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: #eef2f8;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.10);
+}
+
+.av-row-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 600ms ease;
+}
+
+.av-row:hover .av-row-media img {
+    transform: scale(1.07);
+}
+
+.av-row-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(200deg, rgba(209, 13, 88, 0.12), rgba(14, 141, 232, 0.14));
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+/* content side */
+.av-row-content {
+    position: relative;
+    padding-left: 2.75rem;
+}
+
+.av-row-num {
+    position: absolute;
+    top: -0.4rem;
+    left: 0;
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: transparent;
+    -webkit-text-stroke: 1.4px rgba(209, 13, 88, 0.28);
+    user-select: none;
+}
+
+.av-row-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.7rem;
+    color: #101828;
+}
+
+.av-row-text {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #5b6478;
+    margin: 0;
+    max-width: 620px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 820px) {
+    .av-row,
+    .av-row-reverse {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 1.6rem 0;
+    }
+
+    .av-row-reverse .av-row-media,
+    .av-row-reverse .av-row-content {
+        order: 0;
+    }
+
+    .av-row-content {
+        padding-left: 0;
+    }
+
+    .av-row-num {
+        position: static;
+        display: block;
+        margin-bottom: 0.35rem;
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .av-hero {
+        padding: 7rem 1.15rem 3.25rem;
+    }
+
+    .av-section {
+        padding: 2.25rem 1rem 3rem;
+    }
+
+    .av-row-title {
+        font-size: 1.3rem;
+    }
+}

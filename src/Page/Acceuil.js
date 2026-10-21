@@ -7,6 +7,7 @@ import AppelAction from "../Component/Content/AppelAction";
 import ListMetier from "../Component/Content/ListMetier";
 import SolutionServicePage from "../Component/Accueil/SolutionServicePage";
 import '../Component/Content/Service.css'
+import '../Component/Content/AccueilModern.css'
 import {Helmet} from "react-helmet";
 import {useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";

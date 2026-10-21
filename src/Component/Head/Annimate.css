@@ -1,66 +1,16 @@
-@keyframes leftAndRight {
+@keyframes fadeUp {
     0% {
-        transform: translateX(40px);
         opacity: 0;
+        transform: translateY(8px);
     }
     100% {
-        transform: translatex(0);
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.btn-animate {
-    animation: leftAndRight 0.8s ease-in-out forwards;
-}
-.btn-animate:nth-child(1) {
-    animation-delay: 0.1s;
-}
-.btn-animate:nth-child(2) {
-    animation-delay: 0.2s;
-}
-.btn-animate:nth-child(3) {
-    animation-delay: 0.3s;
-}
-.btn-animate:nth-child(4) {
-    animation-delay: 0.4s;
-}
-.btn-animate:nth-child(5) {
-    animation-delay: 0.5s;
-}
-.btn-animate:nth-child(6) {
-    animation-delay: 0.6s;
-}
-.btn-animate:nth-child(7) {
-    animation-delay: 0.1s;
-}
-.btn-animate:nth-child(8) {
-    animation-delay: 0.2s;
-}
-.btn-animate:nth-child(9) {
-    animation-delay: 0.3s;
-}
-.btn-animate:nth-child(10) {
-    animation-delay: 0.4s;
-}
-.btn-animate:nth-child(11) {
-    animation-delay: 0.5s;
-}
-.btn-animate:nth-child(12) {
-    animation-delay: 0.6s;
-}
-
-
-.btn-animate2 {
-    animation: leftAndRight 0.8s ease-in-out forwards;
-}
-.btn-animate2:nth-child(1) {
-    animation-delay: 0.1s;
-}
-.btn-animate2:nth-child(2) {
-    animation-delay: 0.2s;
-}
-.btn-animate2:nth-child(3) {
-    animation-delay: 0.3s;
+.fade-up {
+    animation: fadeUp 0.4s ease-out forwards;
 }
 
 .bg-darker{
@@ -82,9 +32,8 @@
     background-color: #0ff6cb;
     border-radius: 2px;
     box-shadow: 0 0 10px 3px rgba(0, 204, 255, 0.8),
-    0 0 20px 6px rgba(0, 204, 255, 0.5),
-    0 0 30px 10px rgba(0, 204, 255, 0.3);
-    animation: twinkle 2s infinite alternate ease-in-out;
+    0 0 20px 6px rgba(0, 204, 255, 0.5);
+    opacity: 0.85;
 }
 
 .horizontal {
@@ -95,15 +44,6 @@
 .vertical {
     width: 3px;
     height: 20px;
-}
-
-@keyframes twinkle {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.4;
-    }
 }
 
 .letter-spacing{

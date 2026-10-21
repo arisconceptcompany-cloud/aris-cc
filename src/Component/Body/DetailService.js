@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './body.css'
 import ViewContent from "../../FunctionComponent/ViewContent";
+import {FaArrowRight} from "react-icons/fa6";
 
 const DetailService = ({position, element, children,clicked, wMax, t}) => {
     const [containerHeight, setContainerHeight] = useState('600px');
@@ -32,7 +33,7 @@ const DetailService = ({position, element, children,clicked, wMax, t}) => {
                             <p className="" style={{letterSpacing: '0.065rem'}}>{element.text}</p>
                             {children}
                             <div className="w-100 mt-0 d-flex justify-content-sm-start align-items-center">
-                                <i className="mx-2 fa-2x fa fa-arrow-right"/>
+                                <FaArrowRight className="mx-2" size={26}/>
                                 <span onClick={()=>clicked()} className="fw-bold m-0 color-dark-concept cursor-pointer" style={{letterSpacing: '0.07rem', fontSize: '1.5rem',}}>
                                     {t('demandeDevis')}
                                 </span>
@@ -50,7 +51,7 @@ const DetailService = ({position, element, children,clicked, wMax, t}) => {
                                     <div className="col-5 h-100">
                                         <ViewContent time={220} setIsVisible={setViewPhoto} className={`w-100 h-75 rounded-3 mt-4 z-0 ${viewPhoto ? 'arrow-div' : 'invisible'}`}  style={{ backgroundImage: `url('${element.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}/>
                                         <ViewContent time={220} setIsVisible={setViewRequest} className={`w-100 d-flex mt-3 justify-content-sm-start align-items-center ${viewRequest ? 'rotate' : 'invisible'}`}>
-                                            <i className="mx-2 fa-2x fa fa-arrow-right"/>
+                                            <FaArrowRight className="mx-2" size={26}/>
                                             <span onClick={()=>clicked()} className="fw-bold p-2 m-0 scale color-dark-concept cursor-pointer" style={{letterSpacing: '0.07rem', fontSize: '1.65rem',}}>
                                                 {t('demandeDevis')}
                                             </span>
@@ -78,7 +79,7 @@ const DetailService = ({position, element, children,clicked, wMax, t}) => {
                                     <div className="col-6 h-100">
                                         <ViewContent time={220} setIsVisible={setViewPhoto} className={`w-100 h-75 mt-4 rounded-3 z-0 ${viewPhoto ? 'arrow-div-left' : 'invisible'}`} style={{ backgroundImage: `url('${element.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}/>
                                         <ViewContent time={220} setIsVisible={setViewRequest} className={`w-100 mt-0 d-flex justify-content-sm-start align-items-center ${viewRequest ? 'rotate' : 'invisible'}`}>
-                                            <i className="mx-2 fa-2x fa fa-arrow-right"/>
+                                            <FaArrowRight className="mx-2" size={26}/>
                                             <span onClick={()=>clicked()} className="fw-bold p-2 m-0 color-dark-concept cursor-pointer scale" style={{letterSpacing: '0.07rem', fontSize: '1.65rem',}}>
                                                 {t('demandeDevis')}
                                             </span>

@@ -3,6 +3,7 @@ import PostuleElement from "./PostuleElement";
 import {Button, Col, Form, Modal, Row, Spinner} from "react-bootstrap";
 import ElementOffre from "../Model/ElementOffre.ts";
 import Postule from "../Model/Postule.ts";
+import {FaRegCircleDot} from "react-icons/fa6";
 
 const OffreEmploye = () => {
     const [modalShow, setModalShow] = useState(false);
@@ -125,7 +126,7 @@ const OffreEmploye = () => {
                         <h4 className="text-uppercase mb-2 color-concept">Vos missions:</h4>
                         <ul className="list-group list-group-flush">
                             {elementActive?.mission.map((element)=>(
-                                <li key={element.id} className="list-group-item"><i className="fa-regular fa-circle-dot pe-2 color-aris"/>{element.text}</li>
+                                <li key={element.id} className="list-group-item"><FaRegCircleDot className="pe-2 color-aris"/>{element.text}</li>
                             ))}
                         </ul>
                     </div>
@@ -133,7 +134,7 @@ const OffreEmploye = () => {
                         <h4 className="text-uppercase mb-2 color-concept">COMPÉTENCES TECHNIQUES :</h4>
                         <ul className="list-group list-group-flush">
                             {elementActive?.competence.map((element)=>(
-                                <li key={element.id} className="list-group-item"><i className="fa-regular fa-circle-dot pe-2 color-aris"/>{element.text}</li>
+                                <li key={element.id} className="list-group-item"><FaRegCircleDot className="pe-2 color-aris"/>{element.text}</li>
                             ))}
                         </ul>
                     </div>
@@ -141,7 +142,7 @@ const OffreEmploye = () => {
                         <h4 className="text-uppercase mb-2 color-concept">QUALITÉS REQUISES :</h4>
                         <ul className="list-group list-group-flush">
                             {elementActive?.qualite.map((element)=>(
-                                <li key={element.id} className="list-group-item"><i className="fa-regular fa-circle-dot pe-2 color-aris"/>{element.text}</li>
+                                <li key={element.id} className="list-group-item"><FaRegCircleDot className="pe-2 color-aris"/>{element.text}</li>
                             ))}
                         </ul>
                     </div>

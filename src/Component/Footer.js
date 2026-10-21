@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react'
 import {Button, Form, Spinner, Toast} from "react-bootstrap";
 import Newsletter from "../Model/Newsletter.ts";
 import IconFooter from "./Footer/IconFooter";
+import {FaLocationDot, FaPhone, FaEnvelope} from "react-icons/fa6";
 
 const Footer = () => {
     const [nom,setNom]=useState('')
@@ -60,7 +61,7 @@ const Footer = () => {
                             <ul className="list-inline d-md-block d-sm-flex align-items-sm-center flex-sm-column mb-0">
                                 <li className="list-inline-item p-2 rounded-2 d-flex align-items-stretch cursor-pointer" style={{ height: '50px' }}>
                                     <div className="h-100 d-flex align-items-center flex-shrink-0">
-                                        <i className="fa-solid fa-location-dot fa-2x"/>
+                                        <FaLocationDot size={26}/>
                                     </div>
                                     <div className="h-100 d-flex align-items-center flex-grow-1">
                                         <span className="ms-2">Iavoloha, Antananarivo 102</span>
@@ -68,7 +69,7 @@ const Footer = () => {
                                 </li>
                                 <li className="list-inline-item p-2 rounded-2 d-flex align-items-stretch cursor-pointer" style={{ height: '50px' }}>
                                     <div className="h-100 d-flex align-items-center flex-shrink-0" style={{height: '100%'}}>
-                                        <i className="fa-solid fa-phone fa-2x"/>
+                                        <FaPhone size={26}/>
                                     </div>
                                     <div className="h-100 d-flex align-items-center flex-grow-1">
                                         <a  href="https://wa.me/+261385340534" target="_blank" rel="noopener noreferrer" className="ms-2 email-link">+261 38 53 405 34</a>
@@ -76,7 +77,7 @@ const Footer = () => {
                                 </li>
                                 <li className="list-inline-item p-2 rounded-2 d-flex align-items-stretch cursor-pointer" style={{ height: '50px' }}>
                                     <div className="h-100 d-flex align-items-center flex-shrink-0 ">
-                                        <i className="fa-solid fa-envelope fa-2x"/>
+                                        <FaEnvelope size={26}/>
                                     </div>
                                     <div className="h-100 d-flex align-items-center flex-grow-1">
                                         <a  href={`mailto:${'contact@aris-cc.com'}`} onClick={handleClick} className="ms-2 email-link">contact@aris-cc.com</a>

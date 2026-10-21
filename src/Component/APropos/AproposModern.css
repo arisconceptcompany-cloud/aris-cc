@@ -1,0 +1,340 @@
+/* ================= HERO APROPOS ================= */
+.ap-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 9rem 1.5rem 4.5rem;
+    background:
+        radial-gradient(900px 380px at 12% -10%, rgba(209, 13, 88, 0.35), transparent 60%),
+        radial-gradient(900px 420px at 92% 20%, rgba(14, 141, 232, 0.38), transparent 62%),
+        linear-gradient(120deg, #0c1830 0%, #16264a 48%, #0e2a52 100%);
+    color: #fff;
+    text-align: center;
+    scroll-margin-top: 84px;
+}
+
+.ap-hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.ap-hero-title {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 0.9rem;
+}
+
+.ap-hero-title .ap-aris {
+    color: #D10D58;
+}
+
+.ap-hero-title .ap-concept {
+    color: #0e8de8;
+}
+
+.ap-hero-sub {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: rgba(226, 232, 240, 0.85);
+    margin: 0;
+}
+
+/* ================= SHARED SECTION ================= */
+.ap-section {
+    background: linear-gradient(180deg, #f7f9fd 0%, #ffffff 45%, #f4f7fc 100%);
+    padding: 4rem 1.25rem;
+}
+
+.ap-container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.ap-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(209, 13, 88, 0.09);
+    border: 1px solid rgba(209, 13, 88, 0.18);
+    color: #D10D58;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.ap-heading {
+    font-size: clamp(1.6rem, 3.4vw, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #101828;
+    line-height: 1.2;
+    margin: 0 0 0.65rem;
+}
+
+.ap-underline {
+    width: 64px;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #D10D58, #0e8de8);
+    margin-bottom: 2rem;
+}
+
+/* ================= QUI SOMMES-NOUS ================= */
+.ap-about {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3.25rem;
+    align-items: center;
+}
+
+.ap-about-media {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3.4;
+    background: #eef2f8;
+    box-shadow: 0 24px 55px rgba(15, 23, 42, 0.16);
+}
+
+.ap-about-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.ap-about-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(210deg, rgba(209, 13, 88, 0.10), rgba(14, 141, 232, 0.14));
+    pointer-events: none;
+}
+
+.ap-about-badge {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    z-index: 2;
+    padding: 0.7rem 1.1rem;
+    border-radius: 16px;
+    background: rgba(11, 18, 32, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+}
+
+.ap-about-text p {
+    font-size: 1.02rem;
+    line-height: 1.8;
+    color: #47536b;
+    margin: 0 0 1.1rem;
+}
+
+.ap-about-text p .ap-aris {
+    color: #D10D58;
+    font-weight: 700;
+}
+
+.ap-about-text p .ap-concept {
+    color: #0e8de8;
+    font-weight: 700;
+}
+
+/* accent block */
+.ap-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-top: 2.5rem;
+    border-left: 3px solid rgba(209, 13, 88, 0.25);
+    padding-left: 1.6rem;
+}
+
+.ap-point {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+}
+
+.ap-point-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(209, 13, 88, 0.09);
+    color: #D10D58;
+    margin-top: 0.15rem;
+}
+
+.ap-point-text {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #47536b;
+    margin: 0;
+}
+
+/* ================= VALEURS (éditorial, sans cartes) ================= */
+.ap-intro {
+    font-size: 1.02rem;
+    line-height: 1.8;
+    color: #47536b;
+    margin: 0 0 1.5rem;
+    max-width: 860px;
+}
+
+.apv-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.apv-row {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 2.4rem 0;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    transition: opacity 550ms ease, transform 550ms ease;
+}
+
+.apv-list .apv-row:last-child {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.apv-row.invisible {
+    opacity: 0;
+    transform: translateY(28px);
+}
+
+.apv-row-reverse {
+    grid-template-columns: 1fr 340px;
+}
+
+.apv-row-reverse .apv-media {
+    order: 2;
+}
+
+.apv-row-reverse .apv-content {
+    order: 1;
+}
+
+.apv-media {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: #eef2f8;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
+}
+
+.apv-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 600ms ease;
+}
+
+.apv-row:hover .apv-media img {
+    transform: scale(1.07);
+}
+
+.apv-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(210deg, rgba(209, 13, 88, 0.10), rgba(14, 141, 232, 0.14));
+    pointer-events: none;
+}
+
+.apv-content {
+    position: relative;
+    padding-left: 2.75rem;
+}
+
+.apv-num {
+    position: absolute;
+    top: -0.5rem;
+    left: 0;
+    font-size: 2.7rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: transparent;
+    -webkit-text-stroke: 1.4px rgba(209, 13, 88, 0.28);
+    user-select: none;
+}
+
+.apv-title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 0.7rem;
+    color: #101828;
+}
+
+.apv-text {
+    font-size: 1.02rem;
+    line-height: 1.78;
+    color: #5b6478;
+    margin: 0;
+    max-width: 640px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+    .ap-about {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 820px) {
+    .apv-row,
+    .apv-row-reverse {
+        grid-template-columns: 1fr;
+        gap: 1.35rem;
+        padding: 1.8rem 0;
+    }
+
+    .apv-row-reverse .apv-media,
+    .apv-row-reverse .apv-content {
+        order: 0;
+    }
+
+    .apv-content {
+        padding-left: 0;
+    }
+
+    .apv-num {
+        position: static;
+        display: block;
+        margin-bottom: 0.4rem;
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .ap-hero {
+        padding: 7rem 1.15rem 3.25rem;
+    }
+
+    .ap-section {
+        padding: 2.5rem 1rem 3rem;
+    }
+}

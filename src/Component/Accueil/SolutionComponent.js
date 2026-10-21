@@ -5,14 +5,13 @@ const SolutionComponent = ({color,icon,title,children, emplacement}) => {
     const [isVisible, setIsVisible] = useState(false);
     return(
         <ViewContent setIsVisible={setIsVisible} time={250}>
-            <div  className={`card h-100 border-0 mx-auto w-100 ${isVisible ? (emplacement+1)%2!==0 ? 'arrow-div' : 'arrow-div-left' : 'opacity-0'}`}>
-                <div className="card-body m-0">
-                    <h3 className={`text-start mb-3 ${color}`}><i className={`fas fa-2xl p-2 ${icon}`}/>{title}</h3>
-                    <div className="row w-100">
-                        {children}
-                    </div>
+            <article  className={`ac-sol-card ac-sol-card--${color} ${isVisible ? (emplacement+1)%2!==0 ? 'arrow-div' : 'arrow-div-left' : 'invisible'}`}>
+                <span className="ac-sol-icon">{icon && React.createElement(icon, {size: 24})}</span>
+                <h3 className="ac-sol-title">{title}</h3>
+                <div className="ac-sol-body">
+                    {children}
                 </div>
-            </div>
+            </article>
         </ViewContent>
     )
 }

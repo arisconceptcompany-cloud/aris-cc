@@ -1,7 +1,7 @@
 @keyframes showArrow {
     0% {
         opacity: 0;
-        transform: translateX(-100%);
+        transform: translateX(-16px);
     }
     100% {
         opacity: 1;
@@ -9,13 +9,13 @@
     }
 }
 .arrow-div {
-    animation: showArrow 1000ms ease-in-out ;
+    animation: showArrow 450ms ease-out;
 }
 
 @keyframes showArrowLeft {
     0% {
         opacity: 0;
-        transform: translateX(100%);
+        transform: translateX(16px);
     }
     100% {
         opacity: 1;
@@ -23,13 +23,13 @@
     }
 }
 .arrow-div-left {
-    animation: showArrowLeft 700ms ease-in-out;
+    animation: showArrowLeft 450ms ease-out;
 }
 
 @keyframes showTop {
     0% {
         opacity: 0;
-        transform: translateY(-100%);
+        transform: translateY(-14px);
     }
     100% {
         opacity: 1;
@@ -37,13 +37,13 @@
     }
 }
 .showTop {
-    animation: showTop 700ms ease-in-out;
+    animation: showTop 450ms ease-out;
 }
 
 @keyframes showTop-70 {
     0% {
         opacity: 0;
-        transform: translateY(-100%);
+        transform: translateY(-60px);
     }
     100% {
         opacity: 1;
@@ -51,7 +51,7 @@
     }
 }
 .showTop-70 {
-    animation: showTop-70 700ms ease-in-out;
+    animation: showTop-70 500ms ease-out;
 }
 .color-aris{
     color: #D10D58 !important;
@@ -71,17 +71,16 @@
 
 @keyframes rotation {
     0% {
-        transform: translateY(-20px) rotate(-20deg) scale(0.8);
-    }
-    50%{
-        transform: translateY(20px) rotate(20deg) scale(0.8);
+        opacity: 0;
+        transform: translateY(8px);
     }
     100% {
-        transform: translateY(0) rotate(0) scale(1);
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 .rotate{
-    animation: rotation 1200ms ease-in-out forwards;
+    animation: rotation 450ms ease-out forwards;
 }
 .p-text{
     letter-spacing: 0.045rem;
