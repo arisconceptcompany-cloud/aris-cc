@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import integite from '../../Asset/intergrite.jpg'
-import excellent from '../../Asset/exelent.jpg'
-import eng from '../../Asset/engagementClient.jpg'
-import giv from '../../Asset/giveJob.jpg'
+import integite from '../../Asset/integrite.png'
+import excellent from '../../Asset/succes.png'
+import eng from '../../Asset/engagement.png'
+import giv from '../../Asset/responsabilte.png'
 import {useTranslation} from "react-i18next";
 import ViewContent from "../../FunctionComponent/ViewContent";
 import './AproposModern.css';
