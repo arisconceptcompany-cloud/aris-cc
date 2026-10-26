@@ -19,7 +19,7 @@ const Superposed = ({large=false, t}) => {
             {large ? (''): (
                 <div className="ac-stack">
                     <div className={`ac-stack-card ${activeDiv === 1 ? "is-front" : "is-back"}`}>
-                        <div className="ac-stack-media">
+                        <div className="ac-stack-media" style={{ "--stack-photo": `url(${outsourcing})` }}>
                             <img draggable="false" decoding={"async"} src={outsourcing} className="ac-stack-img" alt="outsourcing"/>
                         </div>
                         <div className="ac-stack-label ac-stack-label-blue">
@@ -28,14 +28,14 @@ const Superposed = ({large=false, t}) => {
                     </div>
 
                     <div className={`ac-stack-card ${activeDiv === 2 ? "is-front" : "is-back"}`}>
-                        <div className="ac-stack-media">
+                        <div className="ac-stack-media" style={{ "--stack-photo": `url(${off})` }}>
                             <img draggable="false" decoding={"async"} src={off} className="ac-stack-img" alt="pin"/>
+                        </div>
+                        <div className="ac-stack-label ac-stack-label-pink">
+                            <span>{t('centre')}</span>
                             <span className="ac-stack-pin">
                                 <img draggable="false" decoding={"async"} src={localisation} alt="img-pin"/>
                             </span>
-                        </div>
-                        <div className="ac-stack-label ac-stack-label-pink">
-                            {t('centre')}
                         </div>
                     </div>
                 </div>
