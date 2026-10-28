@@ -37,15 +37,15 @@ const AccueilFooter = () => {
 
     const contactItems = [
         {icon: FaLocationDot, label: 'Iavoloha, Antananarivo 102', href: 'https://maps.app.goo.gl/5hp5qcinzUmxCbaj8', color: 'footer-ic-pink'},
-        {icon: FaPhone, label: '+261 38 12 379 96', href: 'https://wa.me/+261381237996', color: 'footer-ic-blue'},
+        {icon: FaPhone, label: '+261 38 53 405 34', href: 'https://wa.me/+261385340534', color: 'footer-ic-blue'},
         {icon: FaEnvelope, label: 'contact@aris-cc.com', href: 'mailto:contact@aris-cc.com', color: 'footer-ic-cyan', onClick: handleClick},
     ]
 
     const socials = [
         {icon: FaFacebookF, href: 'https://www.facebook.com', label: 'Facebook', color: 'social-facebook'},
         {icon: FaLinkedinIn, href: 'https://www.linkedin.com/in/aris-concept-company-567703240', label: 'LinkedIn', color: 'social-linkedin'},
-        {icon: FaWhatsapp, href: 'https://wa.me/+261381237996', label: 'WhatsApp', color: 'social-whatsapp'},
-        {icon: FaPhone, href: 'tel:+261381237996', label: 'Téléphone', color: 'social-phone'},
+        {icon: FaWhatsapp, href: 'https://wa.me/+261385340534', label: 'WhatsApp', color: 'social-whatsapp'},
+        {icon: FaPhone, href: 'tel:+261385340534', label: 'Téléphone', color: 'social-phone'},
     ]
 
     const expertiseLinks = [

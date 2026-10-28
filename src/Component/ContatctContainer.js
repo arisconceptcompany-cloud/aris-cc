@@ -89,11 +89,11 @@ const ContatctContainer = () => {
                                         <span className="contact-info-value">Iavoloha, Antananarivo 102</span>
                                     </span>
                                 </a>
-                                <a className="contact-info-row" href="tel:+261381237996">
+                                <a className="contact-info-row" href="tel:+261385340534">
                                     <span className="contact-info-icon"><FaPhone size={15}/></span>
                                     <span>
                                         <span className="contact-info-label">Téléphone</span>
-                                        <span className="contact-info-value">+261 38 12 379 96</span>
+                                        <span className="contact-info-value">+261 38 53 405 34</span>
                                     </span>
                                 </a>
                                 <a className="contact-info-row" href="mailto:contact@aris-cc.com">

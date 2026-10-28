@@ -13,8 +13,8 @@ const IconFooter = ({isVisible=true}) => {
     const items = [
         {label: 'lien linkeddin', href: 'https://www.linkedin.com/in/aris-concept-company-567703240', icon: FaLinkedinIn, color: 'social-linkedin', onClick: null},
         {label: 'lien e-mail', href: `mailto:contact@aris-cc.com`, icon: FaAt, color: 'social-phone', onClick: handleClick},
-        {label: 'lien whatsapp', href: 'https://wa.me/+261381237996', icon: FaWhatsapp, color: 'social-whatsapp', onClick: null},
-        {label: 'lien phone contact', href: 'tel:+261381237996', icon: FaPhone, color: 'social-facebook', onClick: null},
+        {label: 'lien whatsapp', href: 'https://wa.me/+261385340534', icon: FaWhatsapp, color: 'social-whatsapp', onClick: null},
+        {label: 'lien phone contact', href: 'tel:+261385340534', icon: FaPhone, color: 'social-facebook', onClick: null},
     ]
 
     return(
